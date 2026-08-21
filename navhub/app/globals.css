@@ -1,0 +1,312 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --default-font-family: var(--font-sans);
+  --default-mono-font-family: var(--font-mono);
+
+  -webkit-text-size-adjust: none;
+
+  --header-height: 58px;
+  --spacing: 0.25rem;
+  --default-transition-duration: .1s;
+  --default-transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+
+  --color-neutral-50:  oklch(98.5% 0 0);
+  --color-neutral-100: oklch(97% 0 0);
+  --color-neutral-200: oklch(92.2% 0 0);
+  --color-neutral-400: oklch(70.8% 0 0);
+  --color-neutral-500: oklch(55.6% 0 0);
+  --color-neutral-600: oklch(43.9% 0 0);
+  --color-neutral-700: oklch(37.1% 0 0);
+  --color-neutral-750: oklch(31% 0 0);
+  --color-neutral-800: oklch(26.9% 0 0);
+  --color-neutral-900: oklch(20.5% 0 0);
+  --color-neutral-925: oklch(17.5% 0 0);
+  --color-neutral-950: oklch(14.5% 0 0);
+  --color-black: #000;
+  --color-white: #fff;
+
+  --color-kumo-neutral-50:   oklch(98.75% 0 0);
+  --color-kumo-neutral-125:  oklch(96.5% 0 0);
+  --color-kumo-neutral-750:  oklch(32% 0 0);
+  --color-kumo-neutral-800:  oklch(26.9% 0 0);
+  --color-kumo-neutral-925:  oklch(17% 0 0);
+  --color-kumo-neutral-950:  oklch(15% 0 0);
+  --color-kumo-neutral-975:  oklch(12% 0 0);
+  --color-kumo-neutral-1000: oklch(10% 0 0);
+
+  --color-blue-400: oklch(70.7% .165 254.624);
+  --color-blue-500: oklch(62.3% .214 259.815);
+  --color-blue-700: oklch(48.8% .243 264.376);
+  --color-emerald-200: oklch(90.5% .093 164.15);
+  --color-emerald-400: oklch(76.5% .177 163.223);
+  --color-emerald-700: oklch(50.8% .118 165.612);
+  --color-red-400: oklch(70.4% .191 22.216);
+  --color-red-600: oklch(57.7% .245 27.325);
+  --color-red-700: oklch(50.5% .213 27.518);
+  --color-orange-400: oklch(75% .183 55.934);
+  --color-orange-650: oklch(81.5% .197 76);
+  --color-teal-700:   oklch(51.1% .096 186.391);
+  --color-purple-700: oklch(49.6% .265 301.924);
+  --color-gray-200: oklch(92.8% .006 264.531);
+
+  /* Semantic tokens — dark (default) */
+  --color-kumo-canvas:   #111111;
+  --color-kumo-elevated: #161616;
+  --color-kumo-base:     #1e1e1e;
+  --color-kumo-tint:     #2a2a2a;
+  --color-kumo-line:     #333333;
+  --color-kumo-brand:    oklch(51.948% .2324 260);
+
+  --text-color-kumo-default:  #e8e8e8;
+  --text-color-kumo-strong:   #ffffff;
+  --text-color-kumo-subtle:   #999999;
+  --text-color-kumo-inactive: #666666;
+  --text-color-kumo-brand:    #f6821f;
+
+  --text-xs:   12px;
+  --text-sm:   13px;
+  --text-base: 14px; --text-base--line-height: 1.5;
+  --text-lg:   16px;
+
+  --font-weight-medium:   500;
+  --font-weight-semibold: 600;
+
+  --radius-lg: .5rem; --radius-xl: .75rem; --radius-2xl: 1rem;
+
+  --accent: #f48120;
+  --sidebar-width: 16.25rem;
+  --sidebar-width-icon: 57px;
+
+  color-scheme: dark;
+}
+
+/* ─── Light mode ──────────────────────────────────────────── */
+.light {
+  color-scheme: light;
+
+  --color-kumo-canvas:   #ffffff;
+  --color-kumo-elevated: #fafafa;
+  --color-kumo-base:     #f0f0f0;
+  --color-kumo-tint:     #e8e8e8;
+  --color-kumo-line:     #d8d8d8;
+
+  --text-color-kumo-default:  #111111;
+  --text-color-kumo-strong:   #000000;
+  --text-color-kumo-subtle:   #555555;
+  --text-color-kumo-inactive: #999999;
+}
+
+/* ─── Global base ─────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: Inter, var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--text-base--line-height);
+  letter-spacing: -.01em;
+  -webkit-font-smoothing: antialiased;
+  background: var(--color-kumo-canvas);
+  color: var(--text-color-kumo-default);
+}
+
+@keyframes subitem-in {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ─── Refer & Earn glass card ────────────────────────────── */
+.refer-earn-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  isolation: isolate;
+}
+.light .refer-earn-card {
+  background: rgba(245, 245, 245, 0.75);
+}
+
+/* the border ring rendered via pseudo-element so glow sits on top of it */
+.refer-earn-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+  z-index: 2;
+}
+.light .refer-earn-card::before {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* ─── Border-glow system ─────────────────────────────────── */
+.border-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 3;
+  overflow: hidden;
+  /* 1px padding = the visible glow ring thickness */
+  padding: 1px;
+  /* mask: only show the 1px padding ring, hide the inner area */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.border-glow-blob {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(244,129,32,1) 0%, rgba(244,129,32,0.0) 65%);
+  transform: translate(-50%, -50%);
+  filter: blur(1px);
+}
+
+.border-glow-blob:nth-child(1) {
+  offset-path: rect(0 100% 100% 0 round 0.75rem);
+  offset-distance: 0%;
+  animation: border-travel 5s linear infinite;
+}
+.border-glow-blob:nth-child(2) {
+  offset-path: rect(0 100% 100% 0 round 0.75rem);
+  offset-distance: 50%;
+  animation: border-travel 5s linear infinite;
+  background: radial-gradient(circle, rgba(255,170,60,0.85) 0%, rgba(244,129,32,0.0) 65%);
+}
+
+@keyframes border-travel {
+  to { offset-distance: 100%; }
+}
+
+/* ─── Refer card CTA button ──────────────────────────────── */
+.refer-cta-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding-inline: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f48120 0%, #e06010 100%);
+  color: #fff;
+  box-shadow: 0 1px 8px rgba(244,129,32,0.45), inset 0 1px 0 rgba(255,255,255,0.15);
+  transition: opacity 0.15s;
+  overflow: hidden;
+  isolation: isolate;
+}
+.refer-cta-btn:hover { opacity: 0.88; }
+.refer-cta-btn .border-glow-blob {
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255,220,150,0.8) 0%, transparent 70%);
+}
+
+/* ─── NavHub logo ────────────────────────────────────────── */
+.navhub-logo {
+  filter: none;
+}
+.light .navhub-logo {
+  filter: invert(1);
+}
+
+/* ─── Enable button ─────────────────────────────────────── */
+.enable-btn {
+  background: #fff;
+  color: #111;
+}
+.light .enable-btn {
+  background: #111;
+  color: #fff;
+}
+
+/* ─── Osmium AI logo (invert in light mode) ──────────────── */
+.osmium-logo {
+  filter: none;
+}
+.light .osmium-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+/* ─── Placeholder color ──────────────────────────────────── */
+input::placeholder {
+  color: var(--text-color-kumo-subtle);
+  opacity: 0.6;
+}
+
+/* ─── Nav item classes (theme-aware) ─────────────────────── */
+.nav-item {
+  color: var(--text-color-kumo-default);
+  background: transparent;
+}
+.nav-item:hover {
+  background: var(--color-kumo-tint);
+  color: var(--text-color-kumo-strong);
+}
+.nav-active {
+  background: var(--color-kumo-tint);
+  color: var(--text-color-kumo-strong);
+}
+
+/* ─── Kumo button ─────────────────────────────────────────── */
+.kumo-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 1.5);
+  height: calc(var(--spacing) * 9);
+  padding-inline: calc(var(--spacing) * 3);
+  border: none;
+  border-radius: 2147483647px;
+  background-color: var(--color-kumo-base);
+  color: var(--text-color-kumo-default) !important;
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  cursor: pointer;
+  width: max-content;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px var(--color-kumo-line);
+  transition: background-color var(--default-transition-duration) var(--default-transition-timing-function);
+  text-decoration: none;
+}
+.kumo-btn:hover { background-color: var(--color-kumo-tint); }
+.kumo-btn:focus { outline: none; }
+
+/* ─── Ghost button ────────────────────────────────────────── */
+.kumo-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 1.5);
+  height: calc(var(--spacing) * 8);
+  padding-inline: calc(var(--spacing) * 3);
+  border: none;
+  border-radius: calc(var(--spacing) * 2);
+  background: transparent;
+  color: var(--text-color-kumo-default);
+  font-size: var(--text-base);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color var(--default-transition-duration) var(--default-transition-timing-function);
+}
+.kumo-ghost-btn:hover { background-color: var(--color-kumo-tint); }
+.kumo-ghost-btn:focus { outline: none; }

@@ -1,0 +1,252 @@
+================================================================================
+  NAVHUB DASHBOARD — OVERVIEW & WHAT HAS BEEN BUILT
+================================================================================
+
+NavHub is a unified command-center dashboard for Navchetna's suite of products.
+It is built with Next.js 14 (App Router), TypeScript, Tailwind CSS, and
+Phosphor Icons. It supports dark mode (default), light mode, and system mode.
+
+--------------------------------------------------------------------------------
+  TECH STACK
+--------------------------------------------------------------------------------
+  - Framework   : Next.js 14 (App Router, 'use client' pages)
+  - Language    : TypeScript + TSX
+  - Styling     : Tailwind CSS + CSS custom properties (design tokens)
+  - Icons       : @phosphor-icons/react
+  - Fonts       : Inter (Google Fonts)
+  - Theme       : Dark / Light / System (via ThemeProvider context)
+  - Logo        : Group 80.png (white-on-transparent, inverted in light mode)
+
+--------------------------------------------------------------------------------
+  AUTHENTICATION PAGES
+--------------------------------------------------------------------------------
+  /login
+    - Split-panel layout (form left, hero image right)
+    - NavHub logo (Group 80.png) top-left
+    - Theme toggle (Light / System / Dark)
+    - Google "last used account" quick-sign-in button
+    - Email + password form with validation
+    - Sign-up link, terms / privacy / cookie links
+    - Right panel: login-bg.jpg with gradient overlay + promo text
+
+  /sign-up
+    - Sign-up form (mirrors login layout)
+
+--------------------------------------------------------------------------------
+  SHARED LAYOUT COMPONENTS
+--------------------------------------------------------------------------------
+  components/dashboard-layout.tsx
+    - Wraps all dashboard pages
+    - Renders Sidebar + Topbar + mobile drawer
+
+  components/sidebar.tsx
+    - NavHub logo (Group 80.png) in header
+    - Account switcher button (shows logged-in email)
+    - Quick search bar (Ctrl+K shortcut, live fuzzy search across all nav items)
+    - Animated main nav ↔ sub-panel slide transition
+    - Main nav items: Home, Analytics, Notifications, API Keys, Webhooks
+    - Products section (11 products listed)
+    - Settings entry point
+    - Collapsible sidebar (icon-only mode on desktop)
+    - Theme pill (Light / System / Dark) in footer
+    - Mobile-responsive (full-width drawer on small screens)
+
+  components/topbar.tsx
+    - Sticky top bar
+    - Hamburger menu (mobile)
+    - Ask AI button
+    - Support link
+    - User menu dropdown (Account Settings, Sign out)
+
+  components/settings-layout.tsx
+    - Shared layout for all settings sub-pages
+
+--------------------------------------------------------------------------------
+  DASHBOARD HOME  (/dashboard)
+--------------------------------------------------------------------------------
+  - Welcome hero with user's name
+  - Global search bar (Ctrl+K)
+  - Workspace Overview stats grid:
+      Products | API Keys | Uptime | Team
+  - Products section — live status cards (3 visible, expandable to all 8):
+      Each card shows: SVG illustration, product name, status dot, 2 stat tiles,
+      and an "Open →" link
+      Products shown: Osmium AI, Aegis Auth, LM Lens, Natraj, RUX, Vajra,
+                      Kriya, OneOnOne
+  - "Show all / Show less" toggle button
+  - Footer status bar: system status, last updated, version
+
+--------------------------------------------------------------------------------
+  ANALYTICS  (/dashboard/analytics/*)
+--------------------------------------------------------------------------------
+  Tab bar: Overview | Usage | Performance | Health | Caching |
+           Rate limits | Cost | Logs | Insights
+
+  Overview tab:
+    - Filter bar (Add filter, Live refresh, Date range picker)
+    - 4 stat cards: Total Requests, Total Visits, Cache Hit Rate, Data Transfer
+    - Requests over time chart (area chart, no-data empty state)
+    - Device type donut chart
+    - Requests by country (no-data state)
+    - Status codes card (no-data empty state with illustration)
+    - Top paths / hosts / client IPs (3-column grid)
+    - Top browsers / OS / user agents (3-column grid)
+    - Top HTTP versions / cache statuses / origin status codes (3-column grid)
+
+  Performance tab (Web Analytics):
+    - Feature description + Enable button
+    - Feature cards carousel (6 cards: Real-time insights, Custom events,
+      Privacy, First-party, Easy integration, Fast script)
+    - Demo dashboard (blurred/faded): metric tabs, area chart, analytics panels
+      for Pages, Referrers, Countries, Devices, OS, Events, Flags
+
+  Traffic tab (Usage):
+    - 4 stat cards: Total Requests, Unique Visitors, Bandwidth Used, Error Rate
+    - Requests & unique visitors over time (dual area chart)
+    - Bandwidth over time chart
+    - Errors over time chart
+    - Requests by HTTP method (donut + bar chart)
+    - Requests by protocol (donut + bar chart)
+    - Requests by content type (bar chart)
+    - Top referrers / countries / bandwidth by host
+    - Top status codes / paths / client IPs
+
+  Date Range Picker (shared across analytics):
+    - Preset list: Last 1h, 6h, 24h, 7d, 30d, 3mo, 12mo, MTD, YTD
+    - Custom calendar with range selection (start/end highlight, hover preview)
+    - Apply / Cancel buttons
+
+  Other tabs (Health, Caching, Rate limits, Cost, Logs, Insights):
+    - Pages exist at their routes but show placeholder / no-data states
+
+--------------------------------------------------------------------------------
+  PRODUCTS  (/dashboard/products/*)
+--------------------------------------------------------------------------------
+  Osmium AI  (/dashboard/products/osmium-ai)
+    - Login gate: "Enable Osmium AI" button → sign-in form (email pre-filled,
+      password field with show/hide toggle, simulated async auth)
+    - After unlock: full analytics dashboard with same tab structure as Analytics
+    - Overview tab: 4 stat cards + 3 shell cards + 2 chart shells
+    - Generic tab template for all other tabs (Usage, Performance, Health, etc.)
+
+  Other products (pages exist, show placeholder):
+    Aegis Auth | LMLens | Natraj | OneOnOne | NSL | RUX | Vajra | Kriya |
+    LeadControl | Vetting
+
+--------------------------------------------------------------------------------
+  SETTINGS  (/dashboard/settings/*)
+--------------------------------------------------------------------------------
+  Main settings page  (/dashboard/settings)
+    - "Manage Account" placeholder
+
+  Sub-pages (all built, some with full UI, some placeholder):
+    /settings/members          — Team members management
+    /settings/billing          — Wallet / billing
+    /settings/api-tokens       — API tokens list
+    /settings/api-keys         — API Keys manager (FULLY BUILT — see below)
+    /settings/webhooks         — Webhooks (FULLY BUILT)
+    /settings/notifications    — Notification preferences
+    /settings/preferences      — User preferences
+    /settings/profile          — Profile settings
+    /settings/appearance       — Appearance settings
+    /settings/authentication   — Auth settings
+    /settings/access-control   — Access control
+    /settings/integrations     — Integrations
+    /settings/sessions         — Active sessions
+    /settings/help-center      — Help center
+    /settings/report-issue     — Report an issue
+    /settings/keyboard-shortcuts — Keyboard shortcuts
+
+  API Keys page  (/dashboard/settings/api-keys)  — FULLY BUILT:
+    - Create API key modal (name, permission level, expiry, scopes)
+    - Key list with: name, prefix (masked), permission badge, status dot,
+      expiry, scopes, 3-dot context menu
+    - Context menu actions: Copy Key, View Logs, Rotate, Revoke, Delete
+    - Revoke confirmation inline
+    - Filter bar (search, permission filter, status filter)
+    - Usage Analytics panel (Total Requests, Success Rate, Error Rate, Rate Limit)
+      with mini progress bars
+    - Permission Levels reference panel (Read / Write / Admin with descriptions)
+    - Portal-rendered dropdown (fixed position, outside DOM hierarchy)
+
+--------------------------------------------------------------------------------
+  OTHER DASHBOARD SECTIONS  (pages exist, placeholder content)
+--------------------------------------------------------------------------------
+  /dashboard/compute          — Compute (Workers, Pages, Functions)
+  /dashboard/ai               — AI (Workers AI, AI Gateway, Vectorize)
+  /dashboard/storage          — Storage & Databases (R2, KV, D1)
+  /dashboard/media            — Media (Stream, Images, Calls)
+  /dashboard/security         — Application Security (WAF, DDoS, Bots)
+  /dashboard/networking       — Networking (DNS, Tunnels, Load Balancing)
+  /dashboard/delivery         — Delivery & Performance (Cache, CDN, Rules)
+  /dashboard/domains          — Domains (All, Register, Transfer)
+  /dashboard/investigate      — Investigate (Log search, Security events, Activity)
+  /dashboard/notifications    — Notifications / Recents
+  /dashboard/recents          — Recent activity
+
+--------------------------------------------------------------------------------
+  DESIGN SYSTEM  (globals.css)
+--------------------------------------------------------------------------------
+  CSS custom properties (design tokens):
+    --color-kumo-canvas      Background canvas
+    --color-kumo-elevated    Slightly elevated surface
+    --color-kumo-base        Card / panel background
+    --color-kumo-tint        Hover / subtle fill
+    --color-kumo-line        Borders and dividers
+    --color-kumo-brand       Brand accent (blue)
+    --text-color-kumo-default  Primary text
+    --text-color-kumo-strong   Strongest text (headings)
+    --text-color-kumo-subtle   Secondary text
+    --text-color-kumo-inactive Disabled / placeholder text
+    --text-color-kumo-brand    Orange brand text (#f6821f)
+
+  Utility classes:
+    .nav-item / .nav-active    Sidebar navigation states
+    .kumo-btn                  Pill button
+    .kumo-ghost-btn            Ghost/transparent button
+    .navhub-logo               Logo (inverted in light mode)
+    .osmium-logo               Osmium AI logo (hue-rotated in light mode)
+    .enable-btn                Enable button (inverts in light mode)
+    .refer-earn-card           Glass card with animated border glow
+    .border-glow               Animated orange border glow system
+
+  Animations:
+    subitem-in                 Sidebar sub-panel item entrance
+    border-travel              Animated glow blob along card border
+
+--------------------------------------------------------------------------------
+  ASSETS  (/public)
+--------------------------------------------------------------------------------
+  group-80.png          NavHub logo (white on transparent, used on login + sidebar)
+  navhub-logo.svg       Original NavHub icon (still present, replaced by group-80)
+  osmium-ai-logo.svg    Osmium AI product logo
+  login-bg.jpg          Login page right-panel background photo
+  sea-storm.mp4         Video asset (available, not yet used in UI)
+  SeasonMix-TRIAL-MediumItalic.otf  Custom font (available, not yet applied)
+
+================================================================================
+  SUMMARY OF WHAT IS FULLY BUILT vs PLACEHOLDER
+================================================================================
+
+  FULLY BUILT:
+    - Login page (complete UI + routing)
+    - Dashboard home (hero, workspace stats, product cards, status bar)
+    - Sidebar (search, nav, sub-panels, collapse, theme toggle)
+    - Topbar (user menu, Ask AI, Support)
+    - Analytics overview (charts, stat cards, all grid sections)
+    - Analytics traffic/usage section (full chart suite)
+    - Analytics performance / web analytics (feature cards + demo dashboard)
+    - API Keys settings page (full CRUD UI, modals, context menus)
+    - Osmium AI product page (login gate + full analytics tabs)
+    - Date range picker (calendar + presets)
+    - Theme system (dark/light/system with CSS tokens)
+    - Logo (light/dark mode adaptive via CSS filter)
+
+  PLACEHOLDER / STUB:
+    - Most settings sub-pages (members, billing, tokens, notifications, etc.)
+    - Compute, AI, Storage, Media, Security, Networking, Delivery sections
+    - Domains, Investigate, Recents sections
+    - All products except Osmium AI
+    - Analytics sub-tabs: Health, Caching, Rate limits, Cost, Logs, Insights
+
+================================================================================
