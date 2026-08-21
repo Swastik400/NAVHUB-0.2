@@ -32,7 +32,7 @@ const INITIAL: Notification[] = [
   { id: 12, type: 'info',    title: 'Model update available',      body: 'Nexus 5.1 is now available with 20% lower latency and improved reasoning. Upgrade from your AI settings.',  time: '3 days ago',  read: true,  product: 'Osmium AI'   },
 ]
 
-const TYPE_META: Record<NotifType, { icon: React.FC<{ size?: number }>, color: string, bg: string }> = {
+const TYPE_META: Record<NotifType, { icon: React.FC<{ size?: number; color?: string }>, color: string, bg: string }> = {
   alert:   { icon: Warning,      color: '#ef4444', bg: 'rgba(239,68,68,0.1)'   },
   warning: { icon: Warning,      color: '#f59e0b', bg: 'rgba(245,158,11,0.1)'  },
   success: { icon: CheckCircle,  color: '#22c55e', bg: 'rgba(34,197,94,0.1)'   },
@@ -176,7 +176,7 @@ export default function NotificationsPage() {
                     background: meta.bg,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}>
-                    <Icon size={17} style={{ color: meta.color }} />
+                    <Icon size={17} color={meta.color} />
                   </div>
 
                   {/* Content */}
