@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Suspense } from 'react'
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import {
@@ -238,7 +238,7 @@ const ALL_NAV_ITEMS = Object.values(PANELS).flatMap(p =>
   p.items.map(item => ({ href: item.href, label: item.label, icon: item.icon, section: p.label }))
 )
 
-export default function Sidebar({ onClose }: { onClose?: () => void }) {
+function SidebarInner({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const currentHref = searchParams.toString() ? `${pathname}?${searchParams.toString()}` : pathname
@@ -570,5 +570,13 @@ export default function Sidebar({ onClose }: { onClose?: () => void }) {
         )}
       </div>
     </div>
+  )
+}
+
+export default function Sidebar({ onClose }: { onClose?: () => void }) {
+  return (
+    <Suspense fallback={null}>
+      <SidebarInner onClose={onClose} />
+    </Suspense>
   )
 }
