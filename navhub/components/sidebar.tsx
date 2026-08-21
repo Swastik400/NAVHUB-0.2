@@ -222,11 +222,11 @@ function ThemePill() {
 
 const PRODUCTS = [
   { href: '/dashboard/products/osmium-ai',   label: 'Osmium AI',    abbr: 'OA', color: '#2563eb', logo: '/osmium-ai-logo.svg' },
-  { href: '/dashboard/products/aegis-auth',  label: 'Aegis Auth',   abbr: 'AA',  color: '#7c3aed', logo: null },
-  { href: '/dashboard/products/lmlens',      label: 'LMLens',       abbr: 'LM',  color: '#374151', logo: null },
-  { href: '/dashboard/products/natraj',      label: 'Natraj',       abbr: 'N',   color: '#b45309', logo: null },
-  { href: '/dashboard/products/oneonone',    label: 'OneOnOne',     abbr: '1:1', color: '#0891b2', logo: null },
-  { href: '/dashboard/products/nsl',         label: 'NSL',          abbr: 'NSL', color: '#374151', logo: null },
+  { href: '/dashboard/products/aegis-auth',  label: 'Aegis Auth',   abbr: 'AA',  color: '#7c3aed', logo: '/aegislogo.png' },
+  { href: '/dashboard/products/lmlens',      label: 'LMLens',       abbr: 'LM',  color: '#374151', logo: '/lmllenslogo.png' },
+  { href: '/dashboard/products/natraj',      label: 'Natraj',       abbr: 'N',   color: '#b45309', logo: '/natrajlogo.png' },
+  { href: '/dashboard/products/oneonone',    label: 'Connectt.live',     abbr: '1:1', color: '#0891b2', logo: '/conectlive.png' },
+  { href: '/dashboard/products/nsl',         label: 'NSL',          abbr: 'NSL', color: '#374151', logo: '/nsllogo.png' },
   { href: '/dashboard/products/rux',         label: 'RUX',          abbr: 'RUX', color: '#374151', logo: null },
   { href: '/dashboard/products/vajra',       label: 'Vajra',        abbr: 'V',   color: '#6d28d9', logo: null },
   { href: '/dashboard/products/kriya',       label: 'Kriya',        abbr: 'K',   color: '#065f46', logo: null },

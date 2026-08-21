@@ -27,18 +27,7 @@ function IllustrationLMLens() {
 
 function IllustrationNatraj() {
   return (
-    <svg width="100%" height="100%" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="240" height="160" fill="#182218" />
-      <ellipse cx="120" cy="80" rx="38" ry="50" fill="none" stroke="#5e9470" strokeWidth="1" opacity="0.4" />
-      <ellipse cx="120" cy="80" rx="55" ry="28" fill="none" stroke="#5e9470" strokeWidth="1" opacity="0.3" />
-      <circle cx="120" cy="80" r="12" fill="#5e9470" opacity="0.15" stroke="#5e9470" strokeWidth="1.2" />
-      <circle cx="120" cy="80" r="4" fill="#5e9470" opacity="0.8" />
-      <line x1="120" y1="30" x2="120" y2="52" stroke="#5e9470" strokeWidth="1" opacity="0.5" />
-      <line x1="120" y1="108" x2="120" y2="130" stroke="#5e9470" strokeWidth="1" opacity="0.5" />
-      <line x1="65" y1="80" x2="84" y2="80" stroke="#5e9470" strokeWidth="1" opacity="0.5" />
-      <line x1="156" y1="80" x2="175" y2="80" stroke="#5e9470" strokeWidth="1" opacity="0.5" />
-      <text x="120" y="148" textAnchor="middle" fill="#5e9470" opacity="0.35" fontSize="9" fontFamily="Inter,sans-serif">Natraj</text>
-    </svg>
+    <img src="/nataraj.png" alt="Natraj" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
