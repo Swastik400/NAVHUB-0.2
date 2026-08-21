@@ -9,51 +9,19 @@ import Link from 'next/link'
 
 function IllustrationOsmium() {
   return (
-    <svg width="100%" height="100%" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="240" height="160" fill="#1a2a35" />
-      <circle cx="120" cy="72" r="32" fill="none" stroke="#7b9eb5" strokeWidth="1.5" />
-      <circle cx="120" cy="72" r="18" fill="none" stroke="#7b9eb5" strokeWidth="1" opacity="0.5" />
-      <circle cx="120" cy="72" r="7" fill="#7b9eb5" opacity="0.9" />
-      <line x1="60" y1="40" x2="103" y2="62" stroke="#7b9eb5" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.4" />
-      <line x1="180" y1="40" x2="137" y2="62" stroke="#7b9eb5" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.4" />
-      <line x1="60" y1="104" x2="103" y2="82" stroke="#7b9eb5" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.4" />
-      <line x1="180" y1="104" x2="137" y2="82" stroke="#7b9eb5" strokeWidth="0.8" strokeDasharray="3 2" opacity="0.4" />
-      <circle cx="60" cy="40" r="6" fill="#1a2a35" stroke="#7b9eb5" strokeWidth="1" />
-      <circle cx="180" cy="40" r="6" fill="#1a2a35" stroke="#7b9eb5" strokeWidth="1" />
-      <circle cx="60" cy="104" r="6" fill="#1a2a35" stroke="#7b9eb5" strokeWidth="1" />
-      <circle cx="180" cy="104" r="6" fill="#1a2a35" stroke="#7b9eb5" strokeWidth="1" />
-      <text x="120" y="138" textAnchor="middle" fill="#7b9eb5" opacity="0.35" fontSize="9" fontFamily="Inter,sans-serif">Osmium AI</text>
-    </svg>
+    <img src="/osmium1.avif" alt="Osmium AI" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
 function IllustrationAegis() {
   return (
-    <svg width="100%" height="100%" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="240" height="160" fill="#2a1a10" />
-      <path d="M120 30 L155 48 L155 88 C155 108 120 122 120 122 C120 122 85 108 85 88 L85 48 Z" fill="none" stroke="#c4855a" strokeWidth="1.5" />
-      <path d="M120 44 L143 56 L143 86 C143 100 120 110 120 110 C120 110 97 100 97 86 L97 56 Z" fill="#c4855a" opacity="0.08" />
-      <circle cx="120" cy="78" r="10" fill="none" stroke="#c4855a" strokeWidth="1.2" />
-      <path d="M116 78 L119 81 L124 74" stroke="#c4855a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-      <text x="120" y="138" textAnchor="middle" fill="#c4855a" opacity="0.35" fontSize="9" fontFamily="Inter,sans-serif">Aegis Auth</text>
-    </svg>
+    <img src="/aegis-auth.avif" alt="Aegis Auth" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
 function IllustrationLMLens() {
   return (
-    <svg width="100%" height="100%" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="240" height="160" fill="#22211a" />
-      <rect x="68" y="32" width="104" height="80" rx="6" fill="#2a2920" stroke="#9e9a7a" strokeWidth="1" />
-      <rect x="80" y="46" width="60" height="5" rx="2.5" fill="#9e9a7a" opacity="0.5" />
-      <rect x="80" y="57" width="80" height="5" rx="2.5" fill="#9e9a7a" opacity="0.35" />
-      <rect x="80" y="68" width="70" height="5" rx="2.5" fill="#9e9a7a" opacity="0.35" />
-      <rect x="80" y="79" width="50" height="5" rx="2.5" fill="#9e9a7a" opacity="0.2" />
-      <circle cx="158" cy="98" r="14" fill="#22211a" stroke="#9e9a7a" strokeWidth="1.2" />
-      <circle cx="158" cy="98" r="8" fill="none" stroke="#9e9a7a" strokeWidth="1" opacity="0.5" />
-      <line x1="168" y1="108" x2="176" y2="116" stroke="#9e9a7a" strokeWidth="1.8" strokeLinecap="round" />
-      <text x="120" y="138" textAnchor="middle" fill="#9e9a7a" opacity="0.35" fontSize="9" fontFamily="Inter,sans-serif">LM Lens</text>
-    </svg>
+    <img src="/lmlens.avif" alt="LM Lens" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
@@ -131,19 +99,7 @@ function IllustrationKriya() {
 
 function IllustrationOneOnOne() {
   return (
-    <svg width="100%" height="100%" viewBox="0 0 240 160" preserveAspectRatio="xMidYMid slice" fill="none">
-      <rect width="240" height="160" fill="#182220" />
-      <circle cx="88" cy="62" r="18" fill="#1e2e2a" stroke="#6b9e8a" strokeWidth="1.2" />
-      <circle cx="88" cy="57" r="7" fill="#6b9e8a" opacity="0.3" />
-      <path d="M74 76 C74 68 102 68 102 76" fill="#6b9e8a" opacity="0.2" />
-      <circle cx="152" cy="62" r="18" fill="#1e2e2a" stroke="#6b9e8a" strokeWidth="1.2" />
-      <circle cx="152" cy="57" r="7" fill="#6b9e8a" opacity="0.3" />
-      <path d="M138 76 C138 68 166 68 166 76" fill="#6b9e8a" opacity="0.2" />
-      <line x1="106" y1="62" x2="134" y2="62" stroke="#6b9e8a" strokeWidth="1" strokeDasharray="3 2" opacity="0.5" />
-      <rect x="80" y="90" width="80" height="22" rx="5" fill="#1e2e2a" stroke="#6b9e8a" strokeWidth="1" />
-      <rect x="90" y="98" width="60" height="3" rx="1.5" fill="#6b9e8a" opacity="0.4" />
-      <text x="120" y="138" textAnchor="middle" fill="#6b9e8a" opacity="0.35" fontSize="9" fontFamily="Inter,sans-serif">OneOnOne</text>
-    </svg>
+    <img src="/connecttbg.avif" alt="Connectt.live" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
@@ -200,7 +156,7 @@ const PRODUCT_STATUS = [
     Illustration: IllustrationKriya,
   },
   {
-    key: 'oneonone', name: 'OneOnOne', href: '/dashboard/ai',
+    key: 'oneonone', name: 'Connectt.live', href: '/dashboard/ai',
     status: 'Operational', statusColor: '#4caf50',
     stats: [{ label: 'Sessions', value: '0' }, { label: 'Mentors', value: '0' }],
     Illustration: IllustrationOneOnOne,
