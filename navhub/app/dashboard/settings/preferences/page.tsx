@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/dashboard-layout'
 import { useTheme } from '@/components/theme-provider'
 import type { Theme } from '@/components/theme-provider'
@@ -132,6 +132,8 @@ function Switch({ on, onChange }: { on: boolean; onChange: (v: boolean) => void 
 
 export default function PreferencesPage() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   const [language, setLanguage]     = useState('English (US)')
   const [timezone, setTimezone]     = useState('Asia/Kolkata (IST, UTC+5:30)')
   const [dateFormat, setDateFormat] = useState('DD/MM/YYYY')
@@ -177,7 +179,7 @@ export default function PreferencesPage() {
             <p style={{ fontSize: 12, fontWeight: 500, margin: '0 0 10px', color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)' }}>Theme</p>
             <div style={{ display: 'flex', gap: 10 }}>
               {THEMES.map(t => {
-                const active = theme === t.value
+                const active = mounted && theme === t.value
                 return (
                   <button
                     key={t.value}
