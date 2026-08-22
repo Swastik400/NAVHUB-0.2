@@ -9,25 +9,25 @@ import Link from 'next/link'
 
 function IllustrationOsmium() {
   return (
-    <img src="/osmium1.avif" alt="Osmium AI" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+    <img src="/osmium1.avif" alt="Osmium AI" loading="lazy" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
 function IllustrationAegis() {
   return (
-    <img src="/aegis-auth.avif" alt="Aegis Auth" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+    <img src="/aegis-auth.avif" alt="Aegis Auth" loading="lazy" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
 function IllustrationLMLens() {
   return (
-    <img src="/lmlens.avif" alt="LM Lens" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+    <img src="/lmlens.avif" alt="LM Lens" loading="lazy" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
 function IllustrationNatraj() {
   return (
-    <img src="/nataraj.png" alt="Natraj" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+    <img src="/nataraj.png" alt="Natraj" loading="lazy" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 
@@ -88,7 +88,7 @@ function IllustrationKriya() {
 
 function IllustrationOneOnOne() {
   return (
-    <img src="/connecttbg.avif" alt="Connectt.live" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
+    <img src="/connecttbg.avif" alt="Connectt.live" loading="lazy" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} />
   )
 }
 

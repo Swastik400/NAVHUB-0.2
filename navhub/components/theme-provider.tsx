@@ -12,13 +12,16 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('system')
+  const [theme, setThemeState] = useState<Theme>(() => {
+    if (typeof window !== 'undefined') {
+      return ((localStorage.getItem('theme') as Theme) ?? 'system')
+    }
+    return 'system'
+  })
 
   useEffect(() => {
-    const saved = (localStorage.getItem('theme') as Theme) ?? 'system'
-    setThemeState(saved)
-    applyTheme(saved)
-  }, [])
+    applyTheme(theme)
+  }, [theme])
 
   const setTheme = (next: Theme) => {
     setThemeState(next)

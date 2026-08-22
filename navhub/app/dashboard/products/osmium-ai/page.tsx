@@ -386,7 +386,7 @@ function GenericTab({ title }: { title: string }) {
   )
 }
 
-/* ── Login gate overlay ─────────────────────────────────── */
+/* ── Login gate ─────────────────────────────────────────── */
 function LoginGate({ onUnlock }: { onUnlock: () => void }) {
   const [step, setStep]         = useState<'enable' | 'login'>('enable')
   const [email, setEmail]       = useState(CURRENT_USER_EMAIL)
@@ -400,104 +400,82 @@ function LoginGate({ onUnlock }: { onUnlock: () => void }) {
     if (!email || !password) { setError('Please fill in all fields.'); return }
     setError('')
     setLoading(true)
-    // Simulate async auth
     setTimeout(() => { setLoading(false); onUnlock() }, 900)
+  }
+
+  if (step === 'enable') {
+    return (
+      <button
+        type="button"
+        onClick={() => setStep('login')}
+        className="enable-btn flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90"
+        style={{ height: 42, padding: '0 28px' }}
+      >
+        Enable Osmium AI
+      </button>
+    )
   }
 
   return (
     <div
-      className="absolute inset-0 z-30 flex items-center justify-center"
-      style={{ background: 'var(--color-kumo-canvas)' }}
+      className="flex flex-col gap-5 rounded-2xl border p-8 shadow-2xl"
+      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', width: 380, maxWidth: '90vw' }}
     >
-      {step === 'enable' ? (
-        /* ── Enable card ── */
-        <button
-          type="button"
-          onClick={() => setStep('login')}
-          className="enable-btn flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90"
-          style={{ height: 42, padding: '0 28px' }}
-        >
-          Enable Osmium AI
-        </button>
-      ) : (
-        /* ── Login card ── */
-        <div
-          className="flex flex-col gap-5 rounded-2xl border p-8 shadow-2xl"
-          style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', width: 380, maxWidth: '90vw' }}
-        >
-          {error && (
-            <p className="text-xs rounded-lg px-3 py-2"
-              style={{ background: 'rgba(239,68,68,0.12)', color: '#f87171' }}>
-              {error}
-            </p>
-          )}
-
-          <form onSubmit={handleSignIn} className="flex flex-col gap-3">
-            {/* Email */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-medium" style={{ color: 'var(--text-color-kumo-subtle)' }}>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                className="w-full rounded-lg px-3 text-sm outline-none"
-                style={{
-                  height: 40,
-                  background: 'var(--color-kumo-canvas)',
-                  color: 'var(--text-color-kumo-default)',
-                  border: '1px solid var(--color-kumo-line)',
-                }}
-              />
-            </div>
-
-            {/* Password */}
-            <div className="flex flex-col gap-1">
-              <label className="text-xs font-medium" style={{ color: 'var(--text-color-kumo-subtle)' }}>Password</label>
-              <div className="relative">
-                <input
-                  type={showPw ? 'text' : 'password'}
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="Enter your password"
-                  className="w-full rounded-lg px-3 pr-10 text-sm outline-none"
-                  style={{
-                    height: 40,
-                    background: 'var(--color-kumo-canvas)',
-                    color: 'var(--text-color-kumo-default)',
-                    border: '1px solid var(--color-kumo-line)',
-                  }}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPw(v => !v)}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center justify-center border-0 bg-transparent cursor-pointer p-0"
-                  style={{ color: 'var(--text-color-kumo-subtle)' }}
-                >
-                  {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-60 mt-1"
-              style={{ height: 42, background: '#fff', color: '#111' }}
-            >
-              {loading ? 'Signing in…' : 'Sign in'}
-            </button>
-          </form>
-
-          <button
-            type="button"
-            onClick={() => { setStep('enable'); setPassword(''); setError('') }}
-            className="text-xs text-center border-0 bg-transparent cursor-pointer transition-opacity hover:opacity-70"
-            style={{ color: 'var(--text-color-kumo-subtle)' }}
-          >
-            ← Back
-          </button>
-        </div>
+      {error && (
+        <p className="text-xs rounded-lg px-3 py-2"
+          style={{ background: 'rgba(239,68,68,0.12)', color: '#f87171' }}>
+          {error}
+        </p>
       )}
+      <form onSubmit={handleSignIn} className="flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-medium" style={{ color: 'var(--text-color-kumo-subtle)' }}>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="w-full rounded-lg px-3 text-sm outline-none"
+            style={{ height: 40, background: 'var(--color-kumo-canvas)', color: 'var(--text-color-kumo-default)', border: '1px solid var(--color-kumo-line)' }}
+          />
+        </div>
+        <div className="flex flex-col gap-1">
+          <label className="text-xs font-medium" style={{ color: 'var(--text-color-kumo-subtle)' }}>Password</label>
+          <div className="relative">
+            <input
+              type={showPw ? 'text' : 'password'}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              className="w-full rounded-lg px-3 pr-10 text-sm outline-none"
+              style={{ height: 40, background: 'var(--color-kumo-canvas)', color: 'var(--text-color-kumo-default)', border: '1px solid var(--color-kumo-line)' }}
+            />
+            <button
+              type="button"
+              onClick={() => setShowPw(v => !v)}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 flex items-center justify-center border-0 bg-transparent cursor-pointer p-0"
+              style={{ color: 'var(--text-color-kumo-subtle)' }}
+            >
+              {showPw ? <EyeSlash size={16} /> : <Eye size={16} />}
+            </button>
+          </div>
+        </div>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-60 mt-1"
+          style={{ height: 42, background: '#fff', color: '#111' }}
+        >
+          {loading ? 'Signing in…' : 'Sign in'}
+        </button>
+      </form>
+      <button
+        type="button"
+        onClick={() => { setStep('enable'); setPassword(''); setError('') }}
+        className="text-xs text-center border-0 bg-transparent cursor-pointer transition-opacity hover:opacity-70"
+        style={{ color: 'var(--text-color-kumo-subtle)' }}
+      >
+        ← Back
+      </button>
     </div>
   )
 }
@@ -516,15 +494,28 @@ export default function OsmiumAIPage() {
 
   return (
     <DashboardLayout>
-      <main className="w-full h-full grow overflow-y-auto relative" style={{ background: 'var(--color-kumo-canvas)' }}>
-        {/* Dashboard content — always rendered, blurred when locked */}
+      <main
+        className="w-full h-full grow relative"
+        style={{
+          background: 'var(--color-kumo-canvas)',
+          overflow: unlocked ? 'auto' : 'hidden',
+        }}
+      >
+        {/* Dashboard content — always rendered, non-interactive when locked */}
         <div style={{ pointerEvents: unlocked ? 'auto' : 'none', userSelect: unlocked ? 'auto' : 'none' }}>
           <TabBar active={tab} />
           {tab === 'overview' ? <OverviewTab /> : <GenericTab title={tabTitles[tab]} />}
         </div>
 
-        {/* Gate overlay */}
-        {!unlocked && <LoginGate onUnlock={() => setUnlocked(true)} />}
+        {/* Gate overlay — fixed to fill the entire screen */}
+        {!unlocked && (
+          <div
+            className="fixed inset-0 z-30 flex items-center justify-center"
+            style={{ background: 'var(--color-kumo-canvas)' }}
+          >
+            <LoginGate onUnlock={() => setUnlocked(true)} />
+          </div>
+        )}
       </main>
     </DashboardLayout>
   )
