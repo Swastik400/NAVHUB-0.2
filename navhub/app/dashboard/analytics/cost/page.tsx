@@ -199,10 +199,12 @@ export default function CostPage() {
         <div style={{ height: 1, background: 'var(--color-kumo-line)', margin: '16px 0' }} />
 
         {/* Info banner */}
-        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, padding: '12px 16px', borderRadius: 10, background: 'var(--color-kumo-base)', boxShadow: '0 0 0 1px var(--color-kumo-line)', marginBottom: 16, fontSize: 13, color: 'var(--text-color-kumo-default)' }}>
-          <Info size={18} style={{ color: 'var(--text-color-kumo-subtle)', flexShrink: 0, marginTop: 1 }} />
-          <span style={{ flex: 1 }}>Costs from service accounts are only shown when grouping by service account.</span>
-          <button type="button" style={{ ...iconBtn, width: 'auto', height: 'auto', padding: '2px 10px', fontSize: 13, background: 'var(--color-kumo-tint)', borderRadius: 6, boxShadow: '0 0 0 1px var(--color-kumo-line)', whiteSpace: 'nowrap' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-start', gap: '8px 10px', padding: '12px 16px', borderRadius: 10, background: 'var(--color-kumo-base)', boxShadow: '0 0 0 1px var(--color-kumo-line)', marginBottom: 16, fontSize: 13, color: 'var(--text-color-kumo-default)' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, flex: '1 1 200px', minWidth: 0 }}>
+            <Info size={18} style={{ color: 'var(--text-color-kumo-subtle)', flexShrink: 0, marginTop: 1 }} />
+            <span>Costs from service accounts are only shown when grouping by service account.</span>
+          </div>
+          <button type="button" style={{ ...iconBtn, width: 'auto', height: 'auto', padding: '4px 12px', fontSize: 13, background: 'var(--color-kumo-tint)', borderRadius: 6, boxShadow: '0 0 0 1px var(--color-kumo-line)', whiteSpace: 'nowrap', flexShrink: 0 }}>
             Group by service account
           </button>
         </div>

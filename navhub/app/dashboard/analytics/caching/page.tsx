@@ -223,15 +223,17 @@ export default function CachingPage() {
 
         {/* Cache hits/misses over time */}
         <div style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12, marginBottom: 20, boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px 12px', borderBottom: '1px solid var(--color-kumo-line)' }}>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Cache hits &amp; misses over time</div>
-              <div style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>Last 7 days · daily intervals</div>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-              <Legend color="rgb(34,197,94)"  label="Hits"   value="31,200" />
-              <Legend color="rgb(239,68,68)"  label="Misses" value="5,880" />
-              <Legend color="rgb(66,144,240)" label="Tokens saved" value="9,360" />
+          <div style={{ padding: '16px 20px 12px', borderBottom: '1px solid var(--color-kumo-line)' }}>
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px 16px' }}>
+              <div>
+                <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Cache hits &amp; misses over time</div>
+                <div style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>Last 7 days · daily intervals</div>
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '6px 14px' }}>
+                <Legend color="rgb(34,197,94)"  label="Hits"   value="31,200" />
+                <Legend color="rgb(239,68,68)"  label="Misses" value="5,880" />
+                <Legend color="rgb(66,144,240)" label="Tokens saved" value="9,360" />
+              </div>
             </div>
           </div>
           <div style={{ padding: '8px 8px 4px', height: 280 }}>
@@ -287,26 +289,28 @@ export default function CachingPage() {
             <div style={{ padding: '16px 20px 12px', borderBottom: '1px solid var(--color-kumo-line)' }}>
               <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Cache performance by model</div>
             </div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
+            <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <table style={{ width: '100%', minWidth: 480, borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
                 <tr style={{ borderBottom: '1px solid var(--color-kumo-line)' }}>
                   {['Model', 'Hits', 'Misses', 'Hit rate', 'Est. savings'].map(h => (
-                    <th key={h} style={{ padding: '8px 16px', textAlign: h === 'Model' ? 'left' : 'right', fontWeight: 500, color: 'var(--text-color-kumo-subtle)', fontSize: 12 }}>{h}</th>
+                    <th key={h} style={{ padding: '8px 12px', textAlign: h === 'Model' ? 'left' : 'right', fontWeight: 500, color: 'var(--text-color-kumo-subtle)', fontSize: 12, whiteSpace: 'nowrap' }}>{h}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
                 {topModels.map((row, i) => (
                   <tr key={i} style={{ borderBottom: i < topModels.length - 1 ? '1px solid var(--color-kumo-line)' : 'none' }}>
-                    <td style={{ padding: '10px 16px', color: 'var(--text-color-kumo-default)', fontFamily: 'monospace', fontSize: 12 }}>{row.model}</td>
-                    <td style={{ padding: '10px 16px', textAlign: 'right', color: 'rgb(34,197,94)', fontVariantNumeric: 'tabular-nums' }}>{row.hits}</td>
-                    <td style={{ padding: '10px 16px', textAlign: 'right', color: 'rgb(239,68,68)', fontVariantNumeric: 'tabular-nums' }}>{row.misses}</td>
-                    <td style={{ padding: '10px 16px', textAlign: 'right', fontWeight: 600, color: 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums' }}>{row.rate}</td>
-                    <td style={{ padding: '10px 16px', textAlign: 'right', color: 'rgb(66,144,240)', fontVariantNumeric: 'tabular-nums' }}>{row.saved}</td>
+                    <td style={{ padding: '10px 12px', color: 'var(--text-color-kumo-default)', fontFamily: 'monospace', fontSize: 11, whiteSpace: 'nowrap' }}>{row.model}</td>
+                    <td style={{ padding: '10px 12px', textAlign: 'right', color: 'rgb(34,197,94)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{row.hits}</td>
+                    <td style={{ padding: '10px 12px', textAlign: 'right', color: 'rgb(239,68,68)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{row.misses}</td>
+                    <td style={{ padding: '10px 12px', textAlign: 'right', fontWeight: 600, color: 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{row.rate}</td>
+                    <td style={{ padding: '10px 12px', textAlign: 'right', color: 'rgb(66,144,240)', fontVariantNumeric: 'tabular-nums', whiteSpace: 'nowrap' }}>{row.saved}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            </div>
           </div>
         </div>
 

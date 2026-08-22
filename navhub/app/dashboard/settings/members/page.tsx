@@ -126,7 +126,7 @@ export default function MembersPage() {
 
   return (
     <DashboardLayout>
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto', padding: 'clamp(1rem,4vw,2rem) clamp(0.75rem,4vw,1.5rem)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
         {/* Header */}
         <div>
@@ -198,37 +198,40 @@ export default function MembersPage() {
               <div
                 key={m.id}
                 style={{
-                  display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px',
+                  display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px 12px',
+                  padding: '12px 16px',
                   borderTop: i > 0 ? '1px solid var(--color-kumo-line)' : 'none',
                 }}
               >
                 <Avatar initials={m.avatar} />
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <div style={{ flex: '1 1 140px', minWidth: 0 }}>
+                  <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {m.name}
                   </p>
-                  <p style={{ fontSize: 12, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <p style={{ fontSize: 12, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                     {m.email}
                   </p>
                 </div>
-                <span style={{ fontSize: 11, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap', flexShrink: 0 }}>
-                  Joined {m.joined}
-                </span>
-                {m.role === 'Owner' ? (
-                  <RoleBadge role="Owner" />
-                ) : (
-                  <RoleSelect value={m.role} onChange={r => handleRoleChange(m.id, r)} />
-                )}
-                {m.role !== 'Owner' && (
-                  removeId === m.id ? (
-                    <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
-                      <button onClick={() => handleRemove(m.id)} style={{ ...dangerBtn }}>Remove</button>
-                      <button onClick={() => setRemoveId(null)} style={{ ...ghostBtn }}>Cancel</button>
-                    </div>
+                <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 8px', marginLeft: 'auto' }}>
+                  <span style={{ fontSize: 11, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap' }}>
+                    Joined {m.joined}
+                  </span>
+                  {m.role === 'Owner' ? (
+                    <RoleBadge role="Owner" />
                   ) : (
-                    <button onClick={() => setRemoveId(m.id)} style={{ ...ghostBtn, flexShrink: 0 }}>Remove</button>
-                  )
-                )}
+                    <RoleSelect value={m.role} onChange={r => handleRoleChange(m.id, r)} />
+                  )}
+                  {m.role !== 'Owner' && (
+                    removeId === m.id ? (
+                      <div style={{ display: 'flex', gap: 6 }}>
+                        <button onClick={() => handleRemove(m.id)} style={{ ...dangerBtn }}>Remove</button>
+                        <button onClick={() => setRemoveId(null)} style={{ ...ghostBtn }}>Cancel</button>
+                      </div>
+                    ) : (
+                      <button onClick={() => setRemoveId(m.id)} style={{ ...ghostBtn }}>Remove</button>
+                    )
+                  )}
+                </div>
               </div>
             ))}
           </div>
@@ -245,23 +248,26 @@ export default function MembersPage() {
                 <div
                   key={inv.id}
                   style={{
-                    display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px',
+                    display: 'flex', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px 12px',
+                    padding: '12px 16px',
                     borderTop: i > 0 ? '1px solid var(--color-kumo-line)' : 'none',
                   }}
                 >
                   <Avatar initials={inv.email[0].toUpperCase()} />
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                  <div style={{ flex: '1 1 140px', minWidth: 0 }}>
+                    <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {inv.email}
                     </p>
                     <p style={{ fontSize: 12, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)' }}>
                       Invited {inv.sent}
                     </p>
                   </div>
-                  <RoleBadge role={inv.role} />
-                  <button onClick={() => handleRevokeInvite(inv.id)} style={{ ...ghostBtn, flexShrink: 0 }}>
-                    Revoke
-                  </button>
+                  <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px 8px', marginLeft: 'auto' }}>
+                    <RoleBadge role={inv.role} />
+                    <button onClick={() => handleRevokeInvite(inv.id)} style={{ ...ghostBtn }}>
+                      Revoke
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
