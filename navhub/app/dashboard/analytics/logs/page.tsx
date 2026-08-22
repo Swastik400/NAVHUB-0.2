@@ -9,7 +9,7 @@ const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-lim
 
 function TabBar() {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -84,7 +84,7 @@ function LogsContent() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem', width: '100%', minWidth: 0 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%', minWidth: 0 }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: keyFilter ? 12 : 16 }}>

@@ -6,7 +6,7 @@ const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-lim
 
 function TabBar() {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -70,7 +70,7 @@ export default function HealthPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
 
         <div style={{ marginBottom: 8 }}>
           <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>System Health</h1>
@@ -91,7 +91,7 @@ export default function HealthPage() {
         </div>
 
         {/* Service grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12, marginBottom: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12, marginBottom: 24 }}>
           {SERVICES.map(svc => (
             <div key={svc.name} style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12, padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>

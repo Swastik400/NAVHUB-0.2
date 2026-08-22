@@ -6,7 +6,7 @@ const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-lim
 
 function TabBar() {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -184,7 +184,7 @@ export default function CachingPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
 
         {/* Page header */}
         <div style={{ marginBottom: 8 }}>
@@ -214,7 +214,7 @@ export default function CachingPage() {
         </div>
 
         {/* Stat cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 20 }}>
           <StatCard label="Cache Hit Rate"     value="84.2%"   sub="↑ 3.1% vs last week" accent="rgb(34,197,94)" />
           <StatCard label="Total Cache Hits"   value="31,200"  sub="Last 7 days" />
           <StatCard label="Total Cache Misses" value="5,880"   sub="Last 7 days" />
@@ -256,7 +256,7 @@ export default function CachingPage() {
         </div>
 
         {/* Cache status donut + top models table */}
-        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr', gap: 16, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 16, marginBottom: 20 }}>
 
           {/* Donut */}
           <div style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12, padding: '16px 20px', boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}>

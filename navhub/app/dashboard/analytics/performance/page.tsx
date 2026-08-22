@@ -6,7 +6,7 @@ const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-lim
 
 function TabBar() {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -134,7 +134,7 @@ export default function PerformancePage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2rem', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
 
         <div style={{ marginBottom: 8 }}>
           <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Performance</h1>
@@ -144,7 +144,7 @@ export default function PerformancePage() {
         <div style={{ height: 1, background: 'var(--color-kumo-line)', margin: '16px 0 20px' }} />
 
         {/* Stat cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 12, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 20 }}>
           <StatCard label="P50 Latency"   value="124 ms" sub="↓ 8 ms vs last week" accent="rgb(34,197,94)" />
           <StatCard label="P95 Latency"   value="286 ms" sub="Last 30 days" />
           <StatCard label="P99 Latency"   value="438 ms" sub="Last 30 days" />
@@ -178,7 +178,7 @@ export default function PerformancePage() {
         </div>
 
         {/* Throughput + Error rate */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16, marginBottom: 20 }}>
 
           <div style={{ ...card, gap: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
@@ -204,7 +204,7 @@ export default function PerformancePage() {
         </div>
 
         {/* Slowest paths + Regional */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 16 }}>
 
           <div style={{ ...card, gap: 0 }}>
             <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-color-kumo-subtle)', marginBottom: 12 }}>Slowest paths</div>

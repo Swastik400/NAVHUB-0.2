@@ -538,7 +538,7 @@ type Tab = typeof TABS[number]
 
 function TabBar({ active }: { active: Tab }) {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -648,7 +648,7 @@ function TrafficSection() {
       <div className="py-2 px-2 flex flex-col gap-4">
 
         {/* row 1 — stat cards */}
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <StatCard label="Total Requests"   value="0" />
           <StatCard label="Unique Visitors"  value="0" />
           <StatCard label="Bandwidth Used"   value="0 B" />
@@ -696,7 +696,7 @@ function TrafficSection() {
         </div>
 
         {/* row 3 — bandwidth + errors over time */}
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
           {/* bandwidth */}
           <div className="rounded-xl border shadow-xs flex flex-col"
@@ -744,7 +744,7 @@ function TrafficSection() {
         </div>
 
         {/* row 4 — method + protocol + content type */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
           <Shell title="Requests by HTTP method" style={{ height: 340 }}>
             <div className="flex h-full flex-col gap-3">
@@ -772,14 +772,14 @@ function TrafficSection() {
         </div>
 
         {/* row 5 — top referrers / countries / bandwidth by host */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Shell title="Top referrers"         pad={false} style={{ height: 440 }}><TopN items={topReferrers}  /></Shell>
           <Shell title="Top countries"          pad={false} style={{ height: 440 }}><TopN items={topCountries}  /></Shell>
           <Shell title="Bandwidth by host"      pad={false} style={{ height: 440 }}><TopN items={topBandwidth}  /></Shell>
         </div>
 
         {/* row 6 — status codes / top paths / top IPs */}
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <Shell title="Top status codes"       pad={false} style={{ height: 440 }}><TopN items={topStatusTraf} /></Shell>
           <Shell title="Top paths by traffic"   pad={false} style={{ height: 440 }}><TopN items={topPaths}      /></Shell>
           <Shell title="Top client IPs"         pad={false} style={{ height: 440 }}><TopN items={topIPs}        /></Shell>
@@ -1101,20 +1101,20 @@ function PerformanceSection() {
             </div>
 
             {/* row 1 — pages + referrers */}
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <AnalyticsPanel tabs={['Pages', 'Routes', 'Hostnames']} columns={['Visitors']} />
               <AnalyticsPanel tabs={['Referrers', 'UTM Parameters']} columns={['Visitors']} />
             </div>
 
             {/* row 2 — countries + devices + OS */}
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <AnalyticsPanelSm tabs={['Countries']} columns={['Visitors']} />
               <AnalyticsPanelSm tabs={['Devices', 'Browsers']} columns={['Visitors']} />
               <AnalyticsPanelSm tabs={['Operating Systems']} columns={['Visitors']} />
             </div>
 
             {/* row 3 — events + flags */}
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-4">
               <AnalyticsPanelSm tabs={['Events']} columns={['Visitors', 'Total']} />
               <div className="flex flex-1">
                 <AnalyticsPanelSm tabs={['Flags']} columns={['Visitors', 'Total']} />
@@ -1176,7 +1176,7 @@ export default function AnalyticsPage() {
         <div className="py-2 px-2 flex flex-col gap-4">
 
           {/* row 1 — 4 stat cards */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard label="Total Requests" value="0" />
             <StatCard label="Total Visits" value="0" />
             <StatCard label="Cache Hit Rate" value="0.00%" />
@@ -1271,7 +1271,7 @@ export default function AnalyticsPage() {
           </div>
 
           {/* row 3 — device type (364px) + by country (364px) */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Shell title="Requests by device type" style={{ height: 364 }}>
               <div className="flex h-full flex-col gap-2">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -1293,21 +1293,21 @@ export default function AnalyticsPage() {
           <StatusCodesCard />
 
           {/* row 5 — top paths / hosts / IPs (440px each) */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Shell title="Top paths" pad={false} style={{ height: 440 }}><TopN items={topPaths} /></Shell>
             <Shell title="Top hosts" pad={false} style={{ height: 440 }}><TopN items={topHosts} /></Shell>
             <Shell title="Top client IPs" pad={false} style={{ height: 440 }}><TopN items={topIPs} /></Shell>
           </div>
 
           {/* row 6 — top browsers / OS / UA (440px each) */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Shell title="Top browsers" pad={false} style={{ height: 440 }}><TopN items={topBrowsers} /></Shell>
             <Shell title="Top operating systems" pad={false} style={{ height: 440 }}><TopN items={topOS} /></Shell>
             <Shell title="Top user agents" pad={false} style={{ height: 440 }}><TopN items={topUA} /></Shell>
           </div>
 
           {/* row 7 — top HTTP / cache / origin (440px each) */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Shell title="Top HTTP versions" pad={false} style={{ height: 440 }}><TopN items={[]} /></Shell>
             <Shell title="Top cache statuses" pad={false} style={{ height: 440 }}><TopN items={topCache} /></Shell>
             <Shell title="Top origin status codes" pad={false} style={{ height: 440 }}><TopN items={topOrigin} /></Shell>

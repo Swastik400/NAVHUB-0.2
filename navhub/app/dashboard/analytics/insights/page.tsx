@@ -6,7 +6,7 @@ const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-lim
 
 function TabBar() {
   return (
-    <div className="flex items-center gap-1 px-4 border-b" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
+    <div className="flex items-center gap-1 px-4 border-b overflow-x-auto no-scrollbar" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>
       {TABS.map(tab => {
         const href =
           tab === 'overview' ? '/dashboard/analytics' :
@@ -113,7 +113,7 @@ export default function InsightsPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '2rem', width: '100%' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
 
         {/* header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 8 }}>
@@ -140,7 +140,7 @@ export default function InsightsPage() {
         <div style={{ height: 1, background: 'var(--color-kumo-line)', margin: '20px 0 24px' }} />
 
         {/* grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
           {INSIGHTS.map((ins, i) => <InsightCard key={i} insight={ins} />)}
         </div>
 

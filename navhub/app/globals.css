@@ -290,6 +290,10 @@ input::placeholder {
 .kumo-btn:hover { background-color: var(--color-kumo-tint); }
 .kumo-btn:focus { outline: none; }
 
+/* ─── Hide scrollbar ─────────────────────────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
 /* ─── Ghost button ────────────────────────────────────────── */
 .kumo-ghost-btn {
   display: inline-flex;
