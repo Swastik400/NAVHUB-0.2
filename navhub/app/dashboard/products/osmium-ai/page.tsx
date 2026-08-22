@@ -405,14 +405,21 @@ function LoginGate({ onUnlock }: { onUnlock: () => void }) {
 
   if (step === 'enable') {
     return (
-      <button
-        type="button"
-        onClick={() => setStep('login')}
-        className="enable-btn flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90"
-        style={{ height: 42, padding: '0 28px' }}
-      >
-        Enable Osmium AI
-      </button>
+      <div className="flex flex-col items-center gap-4">
+        <button
+          type="button"
+          onClick={() => setStep('login')}
+          className="enable-btn flex items-center justify-center rounded-xl text-sm font-semibold border-0 cursor-pointer transition-opacity hover:opacity-90"
+          style={{ height: 42, padding: '0 28px' }}
+        >
+          Enable Osmium AI
+        </button>
+        <div className="flex items-center gap-3" style={{ maxWidth: 320 }}>
+          <div style={{ flex: 1, height: 1, background: 'var(--color-kumo-line)' }} />
+          <span className="text-xs font-medium whitespace-nowrap" style={{ color: 'var(--text-color-kumo-subtle)' }}>Login required to get access</span>
+          <div style={{ flex: 1, height: 1, background: 'var(--color-kumo-line)' }} />
+        </div>
+      </div>
     )
   }
 

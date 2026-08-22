@@ -198,27 +198,30 @@ export default function PreferencesPage() {
               })}
             </div>
           </div>
-          <RowInline label="Density" desc="Controls spacing and padding across the UI.">
-            <div style={{ display: 'flex', gap: 6 }}>
+          <div style={{ padding: '13px 16px', borderTop: '1px solid var(--color-kumo-line)' }}>
+            <div style={{ marginBottom: 10 }}>
+              <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>Density</p>
+              <p style={{ fontSize: 12, margin: '2px 0 0', color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', lineHeight: 1.4 }}>Controls spacing and padding across the UI.</p>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
               {DENSITIES.map(d => (
                 <button
                   key={d.key}
                   onClick={() => setDensity(d.key)}
-                  title={d.desc}
                   style={{
-                    height: 30, padding: '0 12px', borderRadius: 7, cursor: 'pointer', fontSize: 12,
-                    fontWeight: 500, fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap',
-                    border: density === d.key ? '1.5px solid rgb(59,130,246)' : '1px solid var(--color-kumo-line)',
-                    background: density === d.key ? 'rgba(59,130,246,0.08)' : 'var(--color-kumo-canvas)',
-                    color: density === d.key ? 'rgb(59,130,246)' : 'var(--text-color-kumo-subtle)',
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+                    gap: 4, padding: '10px 8px', borderRadius: 9, cursor: 'pointer',
+                    border: density === d.key ? '1.5px solid var(--color-kumo-line)' : '1px solid var(--color-kumo-line)',
+                    background: density === d.key ? 'var(--text-color-kumo-default)' : 'var(--color-kumo-canvas)',
                     transition: 'all 0.15s',
                   }}
                 >
-                  {d.label}
+                  <span style={{ fontSize: 12, fontWeight: 600, fontFamily: 'Inter, var(--font-sans)', color: density === d.key ? 'var(--color-kumo-canvas)' : 'var(--text-color-kumo-default)' }}>{d.label}</span>
+
                 </button>
               ))}
             </div>
-          </RowInline>
+          </div>
           <RowInline label="Reduce motion" desc="Minimizes animations and transitions.">
             <Switch on={reducedMotion} onChange={setReducedMotion} />
           </RowInline>
