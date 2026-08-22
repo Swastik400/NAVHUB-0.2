@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
 import { BookOpen, Export, CaretLeft, CaretRight, Check } from '@phosphor-icons/react'
 
 const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December']
@@ -252,7 +251,7 @@ export default function UsagePage() {
   }
 
   return (
-    <DashboardLayout>
+    <>
       <TabBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem, 4vw, 2rem)', width: '100%' }}>
 
@@ -387,7 +386,7 @@ export default function UsagePage() {
 
         </div>
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 

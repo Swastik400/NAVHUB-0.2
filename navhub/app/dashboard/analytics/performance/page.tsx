@@ -1,6 +1,5 @@
 'use client'
 
-import DashboardLayout from '@/components/dashboard-layout'
 
 const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-limits', 'cost', 'logs', 'insights'] as const
 
@@ -132,7 +131,7 @@ const regions = [
 
 export default function PerformancePage() {
   return (
-    <DashboardLayout>
+    <>
       <TabBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
@@ -258,7 +257,7 @@ export default function PerformancePage() {
 
         </div>
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 

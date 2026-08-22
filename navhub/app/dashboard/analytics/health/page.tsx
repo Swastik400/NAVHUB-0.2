@@ -1,6 +1,5 @@
 'use client'
 
-import DashboardLayout from '@/components/dashboard-layout'
 
 const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-limits', 'cost', 'logs', 'insights'] as const
 
@@ -68,7 +67,7 @@ export default function HealthPage() {
   const total = SERVICES.length
 
   return (
-    <DashboardLayout>
+    <>
       <TabBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
@@ -133,6 +132,6 @@ export default function HealthPage() {
         </div>
 
       </div>
-    </DashboardLayout>
+    </>
   )
 }

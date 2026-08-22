@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
 import { BookOpen, ArrowCounterClockwise, MagnifyingGlass } from '@phosphor-icons/react'
 
 const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-limits', 'cost', 'logs', 'insights'] as const
@@ -108,7 +107,7 @@ export default function RateLimitsPage() {
   })).filter(g => g.rows.length > 0)
 
   return (
-    <DashboardLayout>
+    <>
       <TabBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
@@ -222,7 +221,7 @@ export default function RateLimitsPage() {
         </section>
 
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 

@@ -1,6 +1,5 @@
 'use client'
 
-import DashboardLayout from '@/components/dashboard-layout'
 
 const TABS = ['overview', 'usage', 'performance', 'health', 'caching', 'rate-limits', 'cost', 'logs', 'insights'] as const
 
@@ -182,11 +181,11 @@ const topModels = [
 
 export default function CachingPage() {
   return (
-    <DashboardLayout>
+    <>
       <TabBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
-        {/* Page header */}
+        {/* Page header */}}
         <div style={{ marginBottom: 8 }}>
           <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Caching</h1>
           <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>
@@ -315,7 +314,7 @@ export default function CachingPage() {
         </div>
 
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 
