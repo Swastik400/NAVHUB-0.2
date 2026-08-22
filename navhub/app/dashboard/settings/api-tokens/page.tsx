@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
-
 type Permission = 'Read' | 'Write' | 'Admin'
 
 const ALL_PRODUCTS = ['Osmium AI', 'Aegis Auth', 'LM Lens', 'Natraj', 'RUX', 'Vajra', 'Kriya', 'OneOnOne']
@@ -135,7 +133,6 @@ export default function ApiTokensPage() {
   }
 
   return (
-    <DashboardLayout>
       <div style={{ maxWidth: 760, margin: '0 auto', padding: 'clamp(1rem,4vw,2rem) clamp(0.75rem,4vw,1.5rem)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
         {/* Header */}
@@ -418,7 +415,6 @@ export default function ApiTokensPage() {
         </div>
 
       </div>
-    </DashboardLayout>
   )
 }
 

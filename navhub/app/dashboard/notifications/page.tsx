@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
 import { Bell, CheckCircle, Warning, Info, X, Check, Funnel } from '@phosphor-icons/react'
 
 type NotifType = 'alert' | 'info' | 'success' | 'warning'
@@ -73,8 +72,7 @@ export default function NotificationsPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 24px' }}>
+    <div style={{ maxWidth: 760, margin: '0 auto', padding: '32px 24px' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 24 }}>
@@ -236,7 +234,6 @@ export default function NotificationsPage() {
             })}
           </div>
         )}
-      </div>
-    </DashboardLayout>
+    </div>
   )
 }

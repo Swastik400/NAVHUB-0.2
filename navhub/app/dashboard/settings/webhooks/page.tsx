@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
-
 const responsiveStyles = `
   .wh-wrap { padding: 2rem 1.5rem !important; }
   .wh-stats { grid-template-columns: repeat(4, 1fr) !important; }
@@ -110,8 +108,7 @@ export default function WebhooksPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div className="wh-wrap" style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+    <div className="wh-wrap" style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
         <style dangerouslySetInnerHTML={{ __html: responsiveStyles }} />
 
         {/* Header */}
@@ -284,8 +281,7 @@ export default function WebhooksPage() {
           </div>
         </div>
 
-      </div>
-    </DashboardLayout>
+    </div>
   )
 }
 

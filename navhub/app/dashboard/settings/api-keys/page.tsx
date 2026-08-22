@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
-import DashboardLayout from '@/components/dashboard-layout'
 
 const responsiveStyles = `
   .apk-wrap { padding: 2rem 1.5rem !important; }
@@ -139,8 +138,8 @@ export default function ApiKeysPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div className="apk-wrap" style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
+    <>
+    <div className="apk-wrap" style={{ maxWidth: 800, margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.75rem' }}>
         <style dangerouslySetInnerHTML={{ __html: responsiveStyles }} />
 
         {/* Header */}
@@ -358,7 +357,7 @@ export default function ApiKeysPage() {
         </>,
         document.body
       )}
-    </DashboardLayout>
+    </>
   )
 }
 

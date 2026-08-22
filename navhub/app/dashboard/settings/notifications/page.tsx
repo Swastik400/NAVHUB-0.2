@@ -1,8 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
-
 interface Toggle {
   email: boolean
   push: boolean
@@ -146,7 +144,6 @@ export default function NotificationsPage() {
   }
 
   return (
-    <DashboardLayout>
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
         {/* Header */}
@@ -222,7 +219,6 @@ export default function NotificationsPage() {
         ))}
 
       </div>
-    </DashboardLayout>
   )
 }
 

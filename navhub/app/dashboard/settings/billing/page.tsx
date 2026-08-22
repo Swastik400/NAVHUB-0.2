@@ -1,8 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
-
 const BALANCE = '₹1,668,750.82'
 const TOTAL_ADDED = '₹5,01,200'
 const TOTAL_SPENT = '₹1,095.9'
@@ -30,7 +28,7 @@ export default function BillingPage() {
   }
 
   return (
-    <DashboardLayout>
+    <>
       <style>{`
         .w-shell {
           display: grid;
@@ -310,7 +308,7 @@ export default function BillingPage() {
           </div>
         </div>
       )}
-    </DashboardLayout>
+    </>
   )
 }
 

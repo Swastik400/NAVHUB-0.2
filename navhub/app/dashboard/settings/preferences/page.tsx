@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
 import { useTheme } from '@/components/theme-provider'
 import type { Theme } from '@/components/theme-provider'
 
@@ -148,7 +147,6 @@ export default function PreferencesPage() {
   }
 
   return (
-    <DashboardLayout>
       <div style={{ maxWidth: 760, margin: '0 auto', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
         {/* Header */}
@@ -246,7 +244,6 @@ export default function PreferencesPage() {
         </SectionCard>
 
       </div>
-    </DashboardLayout>
   )
 }
 
