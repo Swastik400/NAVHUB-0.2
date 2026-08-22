@@ -136,25 +136,25 @@ export default function ApiTokensPage() {
 
   return (
     <DashboardLayout>
-      <div style={{ maxWidth: 760, margin: '0 auto', padding: '2rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+      <div style={{ maxWidth: 760, margin: '0 auto', padding: 'clamp(1rem,4vw,2rem) clamp(0.75rem,4vw,1.5rem)', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12 }}>
           <div>
-            <h1 style={{ fontSize: 20, fontWeight: 600, margin: '0 0 4px', color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>
+            <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.25rem)', fontWeight: 600, margin: '0 0 4px', color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>
               API Tokens
             </h1>
             <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', margin: 0, fontFamily: 'Inter, var(--font-sans)' }}>
-              Tokens authenticate API requests on your behalf. Treat them like passwords.
+              Tokens authenticate API requests. Treat them like passwords.
             </p>
           </div>
           <button onClick={() => { setShowCreate(v => !v); setNameError('') }} style={{ ...primaryBtn, flexShrink: 0 }}>
-            {showCreate ? 'Cancel' : '+ Create token'}
+            {showCreate ? 'Cancel' : '+ Create'}
           </button>
         </div>
 
         {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 8 }}>
           {[
             { label: 'Total Tokens',   value: String(tokens.length) },
             { label: 'Active Tokens',  value: String(tokens.filter(t => !t.expires).length + tokens.filter(t => t.expires !== null).length) },
@@ -163,12 +163,12 @@ export default function ApiTokensPage() {
           ].map(stat => (
             <div key={stat.label} style={{
               background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)',
-              borderRadius: 12, padding: '14px 16px', display: 'flex', flexDirection: 'column', gap: 4,
+              borderRadius: 10, padding: 'clamp(10px,3vw,14px) clamp(12px,3vw,16px)', display: 'flex', flexDirection: 'column', gap: 4,
             }}>
-              <p style={{ fontSize: 11, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              <p style={{ fontSize: 10, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 {stat.label}
               </p>
-              <p style={{ fontSize: 20, fontWeight: 600, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>
+              <p style={{ fontSize: 'clamp(1.1rem,4vw,1.25rem)', fontWeight: 600, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>
                 {stat.value}
               </p>
             </div>
@@ -305,17 +305,21 @@ export default function ApiTokensPage() {
             <div style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12 }}>
               {filteredTokens.map((t, i) => (
                 <div key={t.id} style={{ borderTop: i > 0 ? '1px solid var(--color-kumo-line)' : 'none', padding: '12px 16px' }}>
-                  {/* Row 1: icon + name/prefix/scope + permission + menu */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                  {/* Row 1: icon + name/prefix/scope + menu */}
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
                     {/* Icon */}
                     <div style={{ width: 32, height: 32, borderRadius: 8, background: 'var(--color-kumo-tint)', border: '1px solid var(--color-kumo-line)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--text-color-kumo-subtle)' }}>
                         <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" />
                       </svg>
                     </div>
-                    {/* Name + prefix + scope */}
+                    {/* Name + prefix + scope + badges */}
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <p style={{ fontSize: 13, fontWeight: 500, margin: '0 0 2px', color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>{t.name}</p>
+                      <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '4px 8px', marginBottom: 2 }}>
+                        <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>{t.name}</p>
+                        <PermissionBadge permission={t.permission} />
+                        <StatusBadge expires={t.expires} />
+                      </div>
                       <p style={{ fontSize: 11, margin: '0 0 5px', color: 'var(--text-color-kumo-subtle)', fontFamily: 'monospace', letterSpacing: '0.02em' }}>{t.prefix}</p>
                       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                         {t.scope.length === 0 ? (
@@ -324,11 +328,6 @@ export default function ApiTokensPage() {
                           t.scope.map(p => <span key={p} style={scopeTag}>{p}</span>)
                         )}
                       </div>
-                    </div>
-                    {/* Permission + Status badges */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5, flexShrink: 0 }}>
-                      <PermissionBadge permission={t.permission} />
-                      <StatusBadge expires={t.expires} />
                     </div>
                     {/* Menu */}
                     <div style={{ position: 'relative', flexShrink: 0 }}>
@@ -381,7 +380,7 @@ export default function ApiTokensPage() {
                     </div>
                   </div>
                   {/* Row 2: meta info — created · last used · expires */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginTop: 8, paddingLeft: 44 }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 12px', marginTop: 6, paddingLeft: 44 }}>
                     <span style={{ fontSize: 11, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap' }}>
                       Created {t.created}
                     </span>
