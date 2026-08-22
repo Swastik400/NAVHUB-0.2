@@ -20,13 +20,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Sidebar — hidden on mobile unless open */}
       <div className={`fixed inset-y-0 left-0 z-30 h-full md:relative md:z-auto transition-transform duration-300 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-      }`}>
+      }`} style={{ background: 'var(--color-kumo-canvas)' }}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
       </div>
 
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
         <Topbar onMenuClick={() => setSidebarOpen(o => !o)} />
-        <main className="flex-1 overflow-y-auto">
+        <main className="flex-1 overflow-y-auto relative">
           {children}
         </main>
         <footer className="mt-auto px-4 py-3 border-t" style={{ borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-canvas)' }}>

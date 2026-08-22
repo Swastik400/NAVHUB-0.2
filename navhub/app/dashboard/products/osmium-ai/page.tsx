@@ -183,9 +183,9 @@ function DateRangePicker({ onClose, onApply }: { onClose: () => void; onApply: (
   }
 
   return (
-    <div ref={ref} className="absolute right-0 top-full mt-2 z-50 flex rounded-xl border shadow-xl overflow-hidden"
-      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', minWidth: 560 }}>
-      <div className="flex flex-col py-2 border-r" style={{ borderColor: 'var(--color-kumo-line)', minWidth: 160 }}>
+    <div ref={ref} className="absolute right-0 top-full mt-2 z-50 flex flex-col sm:flex-row rounded-xl border shadow-xl overflow-hidden"
+      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', width: 'min(560px, 95vw)' }}>
+      <div className="flex flex-row sm:flex-col overflow-x-auto sm:overflow-x-visible py-2 border-b sm:border-b-0 sm:border-r" style={{ borderColor: 'var(--color-kumo-line)', minWidth: 0 }}>
         {PRESETS.map(p => (
           <button key={p.value} type="button" onClick={() => applyPreset(p.value)}
             className="text-left px-4 py-1.5 text-sm cursor-pointer border-0 transition-colors"
@@ -291,13 +291,13 @@ function DateRangeBtn() {
 /* ── Filter bar ─────────────────────────────────────────── */
 function FilterBar() {
   return (
-    <header className="flex items-center justify-between gap-3 px-4 border-b sticky top-0 z-20"
-      style={{ height: 'var(--header-height, 58px)', borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-elevated)' }}>
+    <header className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-b sticky top-0 z-20"
+      style={{ minHeight: 'var(--header-height, 58px)', borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-elevated)' }}>
       <div className="flex items-center gap-2">
-        <FBtn><Funnel size={16} />Add filter</FBtn>
+        <FBtn><Funnel size={16} /><span className="hidden sm:inline">Add filter</span></FBtn>
       </div>
       <div className="inline-flex items-center gap-2">
-        <FBtn><Play size={16} />Live refresh</FBtn>
+        <FBtn><Play size={16} /><span className="hidden sm:inline">Live refresh</span></FBtn>
         <DateRangeBtn />
       </div>
     </header>
@@ -336,26 +336,26 @@ function OverviewTab() {
   return (
     <div className="py-2 px-2 flex flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-3 py-3 px-1">
-        <h1 className="text-xl font-semibold pl-2" style={{ color: 'var(--text-color-kumo-default)' }}>Osmium AI — Overview</h1>
+        <h1 className="text-lg sm:text-xl font-semibold pl-2" style={{ color: 'var(--text-color-kumo-default)' }}>Osmium AI — Overview</h1>
         <div className="shrink-0 flex items-center gap-2">
           <Btn><Printer size={16} /><span>Print</span></Btn>
         </div>
       </div>
       <FilterBar />
-      <div className="grid grid-cols-4 gap-3 px-2 pt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-2 pt-2">
         <StatCard label="Total Queries"     value="0" />
         <StatCard label="Active Sessions"   value="0" />
         <StatCard label="Avg Response Time" value="—" />
         <StatCard label="Error Rate"        value="0.00%" />
       </div>
-      <div className="grid grid-cols-3 gap-4 px-2">
-        <Shell title="Top query types"   pad={false} style={{ height: 360 }}><NoData /></Shell>
-        <Shell title="Model usage"       pad={false} style={{ height: 360 }}><NoData /></Shell>
-        <Shell title="Session activity"  pad={false} style={{ height: 360 }}><NoData /></Shell>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2">
+        <Shell title="Top query types"   pad={false} style={{ minHeight: 280 }}><NoData /></Shell>
+        <Shell title="Model usage"       pad={false} style={{ minHeight: 280 }}><NoData /></Shell>
+        <Shell title="Session activity"  pad={false} style={{ minHeight: 280 }}><NoData /></Shell>
       </div>
-      <div className="grid grid-cols-2 gap-4 px-2">
-        <Shell title="Requests over time" style={{ height: 300 }}><NoData /></Shell>
-        <Shell title="Latency over time"  style={{ height: 300 }}><NoData /></Shell>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-2">
+        <Shell title="Requests over time" style={{ minHeight: 240 }}><NoData /></Shell>
+        <Shell title="Latency over time"  style={{ minHeight: 240 }}><NoData /></Shell>
       </div>
     </div>
   )
@@ -365,22 +365,22 @@ function GenericTab({ title }: { title: string }) {
   return (
     <div className="py-2 px-2 flex flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-3 py-3 px-1">
-        <h1 className="text-xl font-semibold pl-2" style={{ color: 'var(--text-color-kumo-default)' }}>Osmium AI — {title}</h1>
+        <h1 className="text-lg sm:text-xl font-semibold pl-2" style={{ color: 'var(--text-color-kumo-default)' }}>Osmium AI — {title}</h1>
       </div>
       <FilterBar />
-      <div className="grid grid-cols-4 gap-3 px-2 pt-2">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 px-2 pt-2">
         <StatCard label="Total" value="0" />
         <StatCard label="Peak"  value="—" />
         <StatCard label="Avg"   value="—" />
         <StatCard label="Errors" value="0" />
       </div>
       <div className="px-2">
-        <Shell title={`${title} over time`} style={{ height: 360 }}><NoData /></Shell>
+        <Shell title={`${title} over time`} style={{ minHeight: 280 }}><NoData /></Shell>
       </div>
-      <div className="grid grid-cols-3 gap-4 px-2">
-        <Shell title="Top sources"    pad={false} style={{ height: 360 }}><TopN items={[]} /></Shell>
-        <Shell title="Top endpoints"  pad={false} style={{ height: 360 }}><TopN items={[]} /></Shell>
-        <Shell title="Distribution"   pad={false} style={{ height: 360 }}><NoData /></Shell>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2">
+        <Shell title="Top sources"    pad={false} style={{ minHeight: 280 }}><TopN items={[]} /></Shell>
+        <Shell title="Top endpoints"  pad={false} style={{ minHeight: 280 }}><TopN items={[]} /></Shell>
+        <Shell title="Distribution"   pad={false} style={{ minHeight: 280 }}><NoData /></Shell>
       </div>
     </div>
   )
@@ -494,29 +494,28 @@ export default function OsmiumAIPage() {
 
   return (
     <DashboardLayout>
-      <main
-        className="w-full h-full grow relative"
-        style={{
-          background: 'var(--color-kumo-canvas)',
-          overflow: unlocked ? 'auto' : 'hidden',
-        }}
+      <div
+        className="relative w-full h-full"
+        style={{ background: 'var(--color-kumo-canvas)', overflow: unlocked ? 'auto' : 'hidden' }}
       >
-        {/* Dashboard content — always rendered, non-interactive when locked */}
-        <div style={{ pointerEvents: unlocked ? 'auto' : 'none', userSelect: unlocked ? 'auto' : 'none' }}>
-          <TabBar active={tab} />
-          {tab === 'overview' ? <OverviewTab /> : <GenericTab title={tabTitles[tab]} />}
-        </div>
+        {/* Dashboard content — only rendered after unlock */}
+        {unlocked && (
+          <div>
+            <TabBar active={tab} />
+            {tab === 'overview' ? <OverviewTab /> : <GenericTab title={tabTitles[tab]} />}
+          </div>
+        )}
 
-        {/* Gate overlay — fixed to fill the entire screen */}
+        {/* Gate overlay — absolute, scoped to main content area only */}
         {!unlocked && (
           <div
-            className="fixed inset-0 z-30 flex items-center justify-center"
+            className="absolute inset-0 z-10 flex items-center justify-center"
             style={{ background: 'var(--color-kumo-canvas)' }}
           >
             <LoginGate onUnlock={() => setUnlocked(true)} />
           </div>
         )}
-      </main>
+      </div>
     </DashboardLayout>
   )
 }
