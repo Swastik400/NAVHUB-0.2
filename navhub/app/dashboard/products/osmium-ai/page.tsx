@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation'
 import AnalyticsLayout, { OSMIUM_CONFIG } from '@/components/analytics-layout'
+import Link from 'next/link'
 import { Funnel, Play, CalendarBlank, DotsThree, Printer, CaretLeft, CaretRight, Eye, EyeSlash } from '@phosphor-icons/react'
 import { useState, useRef, useEffect } from 'react'
 
@@ -313,7 +314,7 @@ function TabBar({ active }: { active: Tab }) {
           ? '/dashboard/products/osmium-ai'
           : `/dashboard/products/osmium-ai?tab=${tab}`
         return (
-          <a
+          <Link
             key={tab}
             href={href}
             className="relative px-3 py-2.5 text-sm font-medium capitalize no-underline transition-colors whitespace-nowrap"
@@ -324,7 +325,7 @@ function TabBar({ active }: { active: Tab }) {
             }}
           >
             {tab === 'rate-limits' ? 'Rate limits' : tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </a>
+          </Link>
         )
       })}
     </div>

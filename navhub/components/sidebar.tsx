@@ -160,8 +160,9 @@ const MAIN_NAV_ROUTES = ['/dashboard/settings/api-keys', '/dashboard/settings/we
 
 function getPanelKey(pathname: string): string | null {
   if (MAIN_NAV_ROUTES.some(r => pathname.startsWith(r))) return null
+  // osmium-ai: pathname is always /dashboard/products/osmium-ai regardless of ?tab=
   for (const [key, panel] of Object.entries(PANELS)) {
-    if (pathname.startsWith(panel.base)) return key
+    if (pathname === panel.base || pathname.startsWith(panel.base + '/') || pathname.startsWith(panel.base + '?')) return key
   }
   return null
 }

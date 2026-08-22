@@ -1,9 +1,10 @@
 ﻿﻿﻿'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import AnalyticsLayout, { ANALYTICS_CONFIG } from '@/components/analytics-layout'
-import { Printer, Link, Plus, Funnel, CalendarBlank, Play, DotsThree, CaretLeft, CaretRight } from '@phosphor-icons/react'
+import Link from 'next/link'
+import { Printer, Link as LinkIcon, Plus, Funnel, CalendarBlank, Play, DotsThree, CaretLeft, CaretRight } from '@phosphor-icons/react'
 
 /* ── tiny top buttons (h-6.5 = 26px) ─────────────────── */
 function Btn({ children, emphasis }: { children: React.ReactNode; emphasis?: boolean }) {
@@ -491,7 +492,7 @@ function TabBar({ active }: { active: Tab }) {
           tab === 'usage' ? '/dashboard/analytics/usage' :
           `/dashboard/analytics/${tab}`
         return (
-          <a
+          <Link
             key={tab}
             href={href}
             className="relative px-3 py-2.5 text-sm font-medium capitalize no-underline transition-colors"
@@ -503,7 +504,7 @@ function TabBar({ active }: { active: Tab }) {
             }}
           >
             {tab === 'rate-limits' ? 'Rate limits' : tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </a>
+          </Link>
         )
       })}
     </div>
@@ -1092,7 +1093,7 @@ export default function AnalyticsPage() {
           </div>
           <div className="shrink-0 flex items-center flex-wrap gap-2 pr-2">
             <Btn><Printer size={16} /><span className="hidden sm:inline">Print</span></Btn>
-            <Btn><Link size={16} /><span className="hidden sm:inline">Copy link</span></Btn>
+            <Btn><LinkIcon size={16} /><span className="hidden sm:inline">Copy link</span></Btn>
             <Btn emphasis><Plus size={16} /><span className="hidden sm:inline">Add a chart</span></Btn>
           </div>
         </div>
