@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
-import AnalyticsLayout, { ANALYTICS_CONFIG } from '@/components/analytics-layout'
+import DashboardLayout from '@/components/dashboard-layout'
 import Link from 'next/link'
 import { Printer, Link as LinkIcon, Plus, Funnel, CalendarBlank, Play, DotsThree, CaretLeft, CaretRight } from '@phosphor-icons/react'
 
@@ -1076,7 +1076,7 @@ export default function AnalyticsPage() {
   const tab = (searchParams.get('tab') ?? 'overview') as Tab
 
   return (
-    <AnalyticsLayout config={ANALYTICS_CONFIG}>
+    <DashboardLayout>
       <main className="w-full h-full grow overflow-y-auto" style={{ background: 'var(--color-kumo-canvas)' }}>
 
         {/* tab bar */}
@@ -1254,6 +1254,6 @@ export default function AnalyticsPage() {
         </div>
         </> }
       </main>
-    </AnalyticsLayout>
+    </DashboardLayout>
   )
 }

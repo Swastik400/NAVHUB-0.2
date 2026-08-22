@@ -269,7 +269,8 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
   const panel = displayPanel ? PANELS[displayPanel] : null
 
   useEffect(() => {
-    setActivePanel(getPanelKey(pathname))
+    const key = getPanelKey(pathname)
+    if (key) setActivePanel(key)
   }, [pathname])
 
   useEffect(() => {
