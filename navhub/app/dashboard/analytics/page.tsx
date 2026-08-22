@@ -574,7 +574,7 @@ function TrafficSection() {
         </div>
         <div className="shrink-0 flex items-center flex-wrap gap-2 pr-2">
           <Btn><Printer size={16} /><span>Print</span></Btn>
-          <Btn><Link size={16} /><span>Copy link</span></Btn>
+          <Btn><LinkIcon size={16} /><span>Copy link</span></Btn>
           <Btn emphasis><Plus size={16} /><span>Add a chart</span></Btn>
         </div>
       </div>
