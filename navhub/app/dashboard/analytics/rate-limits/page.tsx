@@ -110,13 +110,13 @@ export default function RateLimitsPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
         {/* Page header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 8 }}>
           <div>
-            <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Rate limits</h1>
-            <p style={{ fontSize: 14, color: 'var(--text-color-kumo-subtle)', marginTop: 6, marginBottom: 0 }}>Your rate limits and usage over the last 24 hours.</p>
+            <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Rate limits</h1>
+            <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>Your rate limits and usage over the last 24 hours.</p>
           </div>
           <a href="#" aria-label="Rate limit docs" title="Rate limit docs" style={iconBtn}>
             <BookOpen size={20} />
@@ -131,7 +131,7 @@ export default function RateLimitsPage() {
             <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
 
               {/* Search */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 36, padding: '0 10px', borderRadius: 8, background: 'var(--color-kumo-base)', boxShadow: '0 0 0 1px var(--color-kumo-line)', width: 240 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, height: 36, padding: '0 10px', borderRadius: 8, background: 'var(--color-kumo-base)', boxShadow: '0 0 0 1px var(--color-kumo-line)', width: 'clamp(160px,40vw,240px)' }}>
                 <MagnifyingGlass size={15} style={{ color: 'var(--text-color-kumo-subtle)', flexShrink: 0, opacity: 0.6 }} />
                 <input
                   value={search}

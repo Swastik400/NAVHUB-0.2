@@ -90,11 +90,11 @@
 .light {
   color-scheme: light;
 
-  --color-kumo-canvas:   #ffffff;
-  --color-kumo-elevated: #fafafa;
-  --color-kumo-base:     #f0f0f0;
-  --color-kumo-tint:     #e8e8e8;
-  --color-kumo-line:     #d8d8d8;
+  --color-kumo-canvas:   #f4f5f7;
+  --color-kumo-elevated: #ffffff;
+  --color-kumo-base:     #ffffff;
+  --color-kumo-tint:     #f0f1f3;
+  --color-kumo-line:     #e2e4e9;
 
   --text-color-kumo-default:  #111111;
   --text-color-kumo-strong:   #000000;
@@ -313,3 +313,8 @@ input::placeholder {
 }
 .kumo-ghost-btn:hover { background-color: var(--color-kumo-tint); }
 .kumo-ghost-btn:focus { outline: none; }
+
+/* Usage page — hide input/output token columns on small screens */
+@media (max-width: 480px) {
+  .usage-col-hide { display: none; }
+}

@@ -48,7 +48,7 @@ function AreaChart({ series, yFmt = (v: number) => `${v}` }: {
   const yTicks = [0, 0.25, 0.5, 0.75, 1].map(t => ({ t, y: PT + cH * (1 - t), label: yFmt(Math.round(max * t)) }))
   const xLabels = [1, 5, 10, 15, 20, 25, 30].map(d => ({ x: toX(d - 1), label: `${d}` }))
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 260 }} preserveAspectRatio="xMidYMid meet">
+    <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'clamp(160px,35vw,260px)' }} preserveAspectRatio="xMidYMid meet">
       <defs>
         {series.map((s, si) => (
           <linearGradient key={si} id={`pg${si}`} x1="0" y1="0" x2="0" y2="1">
@@ -96,9 +96,9 @@ function Legend({ color, label, value }: { color: string; label: string; value: 
 
 function StatCard({ label, value, sub, accent }: { label: string; value: string; sub?: string; accent?: string }) {
   return (
-    <div style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12, padding: '16px 20px', minHeight: 100, display: 'flex', flexDirection: 'column', gap: 4, boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}>
+    <div style={{ background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 10, padding: 'clamp(0.75rem,3vw,1.25rem)', minHeight: 88, display: 'flex', flexDirection: 'column', gap: 4, boxShadow: '0 1px 2px rgba(0,0,0,0.04)' }}>
       <span style={{ fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-color-kumo-subtle)' }}>{label}</span>
-      <span style={{ fontSize: 28, fontWeight: 600, lineHeight: 1, marginTop: 4, color: accent ?? 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums' }}>{value}</span>
+      <span style={{ fontSize: 'clamp(1.25rem,5vw,1.75rem)', fontWeight: 600, lineHeight: 1, marginTop: 4, color: accent ?? 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums' }}>{value}</span>
       {sub && <span style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>{sub}</span>}
     </div>
   )
@@ -134,17 +134,17 @@ export default function PerformancePage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
         <div style={{ marginBottom: 8 }}>
-          <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Performance</h1>
-          <p style={{ fontSize: 14, color: 'var(--text-color-kumo-subtle)', marginTop: 6, marginBottom: 0 }}>Latency, throughput, and error rate across your API traffic.</p>
+          <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Performance</h1>
+          <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>Latency, throughput, and error rate across your API traffic.</p>
         </div>
 
         <div style={{ height: 1, background: 'var(--color-kumo-line)', margin: '16px 0 20px' }} />
 
         {/* Stat cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 12, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: 10, marginBottom: 20 }}>
           <StatCard label="P50 Latency"   value="124 ms" sub="↓ 8 ms vs last week" accent="rgb(34,197,94)" />
           <StatCard label="P95 Latency"   value="286 ms" sub="Last 30 days" />
           <StatCard label="P99 Latency"   value="438 ms" sub="Last 30 days" />
@@ -154,12 +154,12 @@ export default function PerformancePage() {
 
         {/* Latency over time */}
         <div style={{ ...card, gap: 0, marginBottom: 20 }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px 12px', borderBottom: '1px solid var(--color-kumo-line)' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 8, padding: '12px 16px 10px', borderBottom: '1px solid var(--color-kumo-line)' }}>
             <div>
-              <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Response latency over time</div>
-              <div style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>Last 30 days · daily intervals · milliseconds</div>
+              <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Response latency over time</div>
+              <div style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>Last 30 days · daily · ms</div>
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 8 }}>
               <Legend color="rgb(34,197,94)"  label="P50" value="124 ms" />
               <Legend color="rgb(66,144,240)" label="P95" value="286 ms" />
               <Legend color="rgb(239,68,68)"  label="P99" value="438 ms" />
@@ -263,7 +263,7 @@ export default function PerformancePage() {
 }
 
 const card: React.CSSProperties = {
-  background: 'var(--color-kumo-base)', borderRadius: 12,
-  boxShadow: '0 0 0 1px var(--color-kumo-line)', padding: '1.25rem',
+  background: 'var(--color-kumo-base)', borderRadius: 10,
+  boxShadow: '0 0 0 1px var(--color-kumo-line)', padding: 'clamp(0.875rem,3vw,1.25rem)',
   display: 'flex', flexDirection: 'column', gap: 12,
 }

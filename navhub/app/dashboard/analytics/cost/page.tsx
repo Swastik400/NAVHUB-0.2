@@ -48,9 +48,9 @@ function FilterSelect({ label, value }: { label: string; value: string }) {
 function StatCard({ title, value }: { title: string; value: string }) {
   return (
     <div style={card}>
-      <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>{title}</span>
+      <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>{title}</span>
       <div style={{ marginTop: 'auto' }}>
-        <span style={{ fontSize: '1.875rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{value}</span>
+        <span style={{ fontSize: 'clamp(1.25rem,5vw,1.875rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{value}</span>
       </div>
     </div>
   )
@@ -183,13 +183,13 @@ export default function CostPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
         {/* Page header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 8 }}>
           <div>
-            <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Cost</h1>
-            <p style={{ fontSize: 14, color: 'var(--text-color-kumo-subtle)', marginTop: 6, marginBottom: 0 }}>Cost of your organization's usage over time.</p>
+            <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Cost</h1>
+            <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>Cost of your organization's usage over time.</p>
           </div>
           <a href="#" aria-label="View documentation" title="View documentation" style={iconBtn}>
             <BookOpen size={20} />
@@ -235,7 +235,7 @@ export default function CostPage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
           {/* Stat cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 12 }}>
             <StatCard title="Total cost" value={fmt(TOTAL_COST)} />
             <StatCard title="Total token cost" value={fmt(TOKEN_COST)} />
             <StatCard title="Total web search cost" value={fmt(WEB_COST)} />
@@ -264,13 +264,13 @@ export default function CostPage() {
 
 const card: React.CSSProperties = {
   background: 'var(--color-kumo-base)',
-  borderRadius: 12,
+  borderRadius: 10,
   boxShadow: '0 0 0 1px var(--color-kumo-line)',
-  padding: '1.25rem',
+  padding: 'clamp(0.875rem,3vw,1.25rem)',
   display: 'flex',
   flexDirection: 'column',
-  gap: 12,
-  minHeight: 120,
+  gap: 10,
+  minHeight: 100,
 }
 const filterBox: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 6,

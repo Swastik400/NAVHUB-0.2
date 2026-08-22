@@ -84,12 +84,12 @@ function LogsContent() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%', minWidth: 0 }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%', minWidth: 0 }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: keyFilter ? 12 : 16 }}>
-          <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Logs</h1>
-          <span style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)' }}>
+          <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Logs</h1>
+          <span style={{ fontSize: 12, color: 'var(--text-color-kumo-subtle)' }}>
             Last refresh time: {refreshTime}
           </span>
         </div>

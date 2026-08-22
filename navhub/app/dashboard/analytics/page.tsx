@@ -123,11 +123,11 @@ function DateRangePicker({ onClose, onApply }: { onClose: () => void; onApply: (
   }
 
   return (
-    <div ref={ref} className="absolute right-0 top-full mt-2 z-50 flex rounded-xl border shadow-xl overflow-hidden"
-      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', minWidth: 560 }}>
+    <div ref={ref} className="absolute right-0 top-full mt-2 z-50 flex flex-col sm:flex-row rounded-xl border shadow-xl overflow-hidden"
+      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', width: 'min(560px, 95vw)' }}>
 
       {/* left — presets */}
-      <div className="flex flex-col py-2 border-r" style={{ borderColor: 'var(--color-kumo-line)', minWidth: 160 }}>
+      <div className="flex flex-row sm:flex-col overflow-x-auto sm:overflow-visible py-2 border-b sm:border-b-0 sm:border-r" style={{ borderColor: 'var(--color-kumo-line)' }}>
         {PRESETS.map(p => (
           <button key={p.value} type="button" onClick={() => applyPreset(p.value)}
             className="text-left px-4 py-1.5 text-sm cursor-pointer border-0 transition-colors"
@@ -245,10 +245,10 @@ function Shell({ title, children, pad = true, style }: { title: string; children
 /* ── stat card ────────────────────────────────────────── */
 function StatCard({ label, value, sub }: { label: string; value: string; sub?: string }) {
   return (
-    <div className="relative flex flex-col gap-1 rounded-xl border px-5 py-4 shadow-xs"
-      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', minHeight: 100 }}>
+    <div className="relative flex flex-col gap-1 rounded-xl border px-3 py-3 shadow-xs sm:px-5 sm:py-4"
+      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', minHeight: 88 }}>
       <span className="text-xs font-medium uppercase tracking-wide" style={{ color: 'var(--text-color-kumo-subtle)' }}>{label}</span>
-      <span className="text-3xl font-semibold tabular-nums leading-none mt-1" style={{ color: 'var(--text-color-kumo-default)' }}>{value}</span>
+      <span className="text-2xl sm:text-3xl font-semibold tabular-nums leading-none mt-1" style={{ color: 'var(--text-color-kumo-default)' }}>{value}</span>
       {sub && <span className="text-xs mt-1" style={{ color: 'var(--text-color-kumo-subtle)' }}>{sub}</span>}
       {!sub && <span className="text-xs mt-1" style={{ color: 'var(--text-color-kumo-subtle)' }}>No data yet</span>}
     </div>
@@ -744,45 +744,36 @@ function TrafficSection() {
         </div>
 
         {/* row 4 — method + protocol + content type */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
-          <Shell title="Requests by HTTP method" style={{ height: 340 }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Shell title="Requests by HTTP method" style={{ minHeight: 260 }}>
             <div className="flex h-full flex-col gap-3">
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-32"><Donut slices={methodSlices} /></div>
-              </div>
+              <div className="flex items-center justify-center"><div className="w-28 h-28"><Donut slices={methodSlices} /></div></div>
               <BarChart bars={methodBars} />
             </div>
           </Shell>
-
-          <Shell title="Requests by protocol" style={{ height: 340 }}>
+          <Shell title="Requests by protocol" style={{ minHeight: 260 }}>
             <div className="flex h-full flex-col gap-3">
-              <div className="flex items-center justify-center">
-                <div className="w-32 h-32"><Donut slices={protocolSlices} /></div>
-              </div>
+              <div className="flex items-center justify-center"><div className="w-28 h-28"><Donut slices={protocolSlices} /></div></div>
               <BarChart bars={protocolBars} />
             </div>
           </Shell>
-
-          <Shell title="Requests by content type" style={{ height: 340 }}>
-            <div className="flex h-full flex-col gap-4 justify-center">
-              <BarChart bars={contentBars} />
-            </div>
+          <Shell title="Requests by content type" style={{ minHeight: 260 }}>
+            <div className="flex h-full flex-col gap-4 justify-center"><BarChart bars={contentBars} /></div>
           </Shell>
         </div>
 
         {/* row 5 — top referrers / countries / bandwidth by host */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Shell title="Top referrers"         pad={false} style={{ height: 440 }}><TopN items={topReferrers}  /></Shell>
-          <Shell title="Top countries"          pad={false} style={{ height: 440 }}><TopN items={topCountries}  /></Shell>
-          <Shell title="Bandwidth by host"      pad={false} style={{ height: 440 }}><TopN items={topBandwidth}  /></Shell>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Shell title="Top referrers"       pad={false} style={{ minHeight: 200 }}><TopN items={topReferrers}  /></Shell>
+          <Shell title="Top countries"        pad={false} style={{ minHeight: 200 }}><TopN items={topCountries}  /></Shell>
+          <Shell title="Bandwidth by host"    pad={false} style={{ minHeight: 200 }}><TopN items={topBandwidth}  /></Shell>
         </div>
 
         {/* row 6 — status codes / top paths / top IPs */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <Shell title="Top status codes"       pad={false} style={{ height: 440 }}><TopN items={topStatusTraf} /></Shell>
-          <Shell title="Top paths by traffic"   pad={false} style={{ height: 440 }}><TopN items={topPaths}      /></Shell>
-          <Shell title="Top client IPs"         pad={false} style={{ height: 440 }}><TopN items={topIPs}        /></Shell>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+          <Shell title="Top status codes"     pad={false} style={{ minHeight: 200 }}><TopN items={topStatusTraf} /></Shell>
+          <Shell title="Top paths by traffic" pad={false} style={{ minHeight: 200 }}><TopN items={topPaths}      /></Shell>
+          <Shell title="Top client IPs"       pad={false} style={{ minHeight: 200 }}><TopN items={topIPs}        /></Shell>
         </div>
 
       </div>
@@ -1004,11 +995,11 @@ function PerformanceSection() {
 
       {/* ── header ── */}
       <div className="border-b" style={{ borderColor: 'var(--color-kumo-line)', marginBottom: '3rem' }}>
-        <div className="px-6 py-10 flex flex-col gap-6">
+        <div className="px-4 py-6 sm:px-6 sm:py-10 flex flex-col gap-4 sm:gap-6">
 
           {/* title + description */}
           <div className="flex flex-col gap-4">
-            <h1 className="text-3xl font-medium" style={{ color: 'var(--text-color-kumo-default)' }}>Web Analytics</h1>
+            <h1 className="text-xl sm:text-3xl font-medium" style={{ color: 'var(--text-color-kumo-default)' }}>Web Analytics</h1>
             <div className="flex flex-col gap-8">
               <p className="text-sm" style={{ color: 'var(--text-color-kumo-subtle)' }}>
                 Collect valuable insights on user behavior and site performance with detailed page view metrics. Gain knowledge on top pages.{' '}
@@ -1150,24 +1141,24 @@ export default function AnalyticsPage() {
         {/* title bar */}
         <div className="flex-1 flex flex-wrap items-start justify-between gap-3 py-3 px-3">
           <div className="flex items-center flex-1">
-            <h1 className="inline-block pl-2 border border-dashed border-transparent text-xl font-semibold hover:cursor-pointer hover:rounded hover:border-(--color-kumo-line) hover:bg-(--color-kumo-tint)"
+            <h1 className="inline-block pl-2 border border-dashed border-transparent text-base sm:text-xl font-semibold hover:cursor-pointer hover:rounded hover:border-(--color-kumo-line) hover:bg-(--color-kumo-tint)"
               style={{ color: 'var(--text-color-kumo-default)' }}>Traffic overview</h1>
           </div>
           <div className="shrink-0 flex items-center flex-wrap gap-2 pr-2">
-            <Btn><Printer size={16} /><span>Print</span></Btn>
-            <Btn><Link size={16} /><span>Copy link</span></Btn>
-            <Btn emphasis><Plus size={16} /><span>Add a chart</span></Btn>
+            <Btn><Printer size={16} /><span className="hidden sm:inline">Print</span></Btn>
+            <Btn><Link size={16} /><span className="hidden sm:inline">Copy link</span></Btn>
+            <Btn emphasis><Plus size={16} /><span className="hidden sm:inline">Add a chart</span></Btn>
           </div>
         </div>
 
         {/* filter bar */}
-        <header className="flex items-center justify-between gap-3 px-4 border-b sticky top-0 z-20"
-          style={{ height: 'var(--header-height, 58px)', borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-elevated)' }}>
+        <header className="flex flex-wrap items-center justify-between gap-2 px-3 py-2 border-b sticky top-0 z-20"
+          style={{ minHeight: 'var(--header-height, 58px)', borderColor: 'var(--color-kumo-line)', background: 'var(--color-kumo-elevated)' }}>
           <div className="flex items-center gap-2">
-            <FBtn><Funnel size={16} />Add filter</FBtn>
+            <FBtn><Funnel size={16} /><span className="hidden sm:inline">Add filter</span></FBtn>
           </div>
           <div className="inline-flex items-center gap-2">
-            <FBtn><Play size={16} />Live refresh</FBtn>
+            <FBtn><Play size={16} /><span className="hidden sm:inline">Live refresh</span></FBtn>
             <DateRangeBtn />
           </div>
         </header>
@@ -1270,9 +1261,9 @@ export default function AnalyticsPage() {
             </div>
           </div>
 
-          {/* row 3 — device type (364px) + by country (364px) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Shell title="Requests by device type" style={{ height: 364 }}>
+          {/* row 3 — device type + by country */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <Shell title="Requests by device type" style={{ minHeight: 220 }}>
               <div className="flex h-full flex-col gap-2">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                   <Legend color="rgb(66,144,240)" label="Desktop" value="0" />
@@ -1280,37 +1271,37 @@ export default function AnalyticsPage() {
                   <Legend color="rgb(232,100,157)" label="Tablet" value="0" />
                 </div>
                 <div className="relative min-h-0 flex-1 flex items-center justify-center">
-                  <div className="w-44 h-44"><Donut slices={devSlices} /></div>
+                  <div className="w-32 h-32"><Donut slices={devSlices} /></div>
                 </div>
               </div>
             </Shell>
-            <div className="col-span-2">
-              <Shell title="Requests by country" pad={false} style={{ height: 364 }}><NoData /></Shell>
+            <div className="md:col-span-2">
+              <Shell title="Requests by country" pad={false} style={{ minHeight: 220 }}><NoData /></Shell>
             </div>
           </div>
 
           {/* row 4 — status codes */}
           <StatusCodesCard />
 
-          {/* row 5 — top paths / hosts / IPs (440px each) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Shell title="Top paths" pad={false} style={{ height: 440 }}><TopN items={topPaths} /></Shell>
-            <Shell title="Top hosts" pad={false} style={{ height: 440 }}><TopN items={topHosts} /></Shell>
-            <Shell title="Top client IPs" pad={false} style={{ height: 440 }}><TopN items={topIPs} /></Shell>
+          {/* row 5 — top paths / hosts / IPs */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <Shell title="Top paths" pad={false} style={{ minHeight: 200 }}><TopN items={topPaths} /></Shell>
+            <Shell title="Top hosts" pad={false} style={{ minHeight: 200 }}><TopN items={topHosts} /></Shell>
+            <Shell title="Top client IPs" pad={false} style={{ minHeight: 200 }}><TopN items={topIPs} /></Shell>
           </div>
 
-          {/* row 6 — top browsers / OS / UA (440px each) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Shell title="Top browsers" pad={false} style={{ height: 440 }}><TopN items={topBrowsers} /></Shell>
-            <Shell title="Top operating systems" pad={false} style={{ height: 440 }}><TopN items={topOS} /></Shell>
-            <Shell title="Top user agents" pad={false} style={{ height: 440 }}><TopN items={topUA} /></Shell>
+          {/* row 6 — top browsers / OS / UA */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <Shell title="Top browsers" pad={false} style={{ minHeight: 200 }}><TopN items={topBrowsers} /></Shell>
+            <Shell title="Top operating systems" pad={false} style={{ minHeight: 200 }}><TopN items={topOS} /></Shell>
+            <Shell title="Top user agents" pad={false} style={{ minHeight: 200 }}><TopN items={topUA} /></Shell>
           </div>
 
-          {/* row 7 — top HTTP / cache / origin (440px each) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Shell title="Top HTTP versions" pad={false} style={{ height: 440 }}><TopN items={[]} /></Shell>
-            <Shell title="Top cache statuses" pad={false} style={{ height: 440 }}><TopN items={topCache} /></Shell>
-            <Shell title="Top origin status codes" pad={false} style={{ height: 440 }}><TopN items={topOrigin} /></Shell>
+          {/* row 7 — top HTTP / cache / origin */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <Shell title="Top HTTP versions" pad={false} style={{ minHeight: 200 }}><TopN items={[]} /></Shell>
+            <Shell title="Top cache statuses" pad={false} style={{ minHeight: 200 }}><TopN items={topCache} /></Shell>
+            <Shell title="Top origin status codes" pad={false} style={{ minHeight: 200 }}><TopN items={topOrigin} /></Shell>
           </div>
 
         </div>

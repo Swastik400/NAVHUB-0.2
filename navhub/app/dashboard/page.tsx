@@ -160,7 +160,7 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <style>{`
-        .db-cards    { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        .db-cards    { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
         .db-ws-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
         @media(max-width:768px){ .db-cards { grid-template-columns:repeat(2,1fr); } .db-ws-stats { grid-template-columns:repeat(2,1fr); } }
         @media(max-width:480px){ .db-cards { grid-template-columns:1fr; } }
@@ -169,13 +169,13 @@ export default function DashboardPage() {
       `}</style>
 
       <div style={{ display:'flex', flexDirection:'column', flexGrow:1, background:'var(--color-kumo-canvas)' }}>
-        <div style={{ margin:'0 auto', width:'100%', maxWidth:1000, padding:'2rem 1rem 3rem', display:'flex', flexDirection:'column', gap:'2rem' }}>
+        <div style={{ margin:'0 auto', width:'100%', maxWidth:1000, padding:'1rem 0.75rem 2rem', display:'flex', flexDirection:'column', gap:'1.25rem' }}>
 
           {/* ── Hero ── */}
           <div style={{ display:'flex', flexDirection:'column', gap:'1.25rem' }}>
             <div>
               <p style={{ fontSize:12, fontWeight:600, letterSpacing:'0.08em', textTransform:'uppercase', color:'var(--text-color-kumo-subtle)', margin:'0 0 0.35rem', fontFamily:'Inter,var(--font-sans)', opacity:0.6 }}>NavHub Command Center</p>
-              <h1 style={{ fontSize:'1.6rem', fontWeight:600, color:'var(--text-color-kumo-default)', margin:'0 0 0.3rem', fontFamily:'Inter,var(--font-sans)', letterSpacing:'-0.02em', lineHeight:1.2 }}>
+              <h1 style={{ fontSize:'1.25rem', fontWeight:600, color:'var(--text-color-kumo-default)', margin:'0 0 0.3rem', fontFamily:'Inter,var(--font-sans)', letterSpacing:'-0.02em', lineHeight:1.2 }}>
                 Welcome back, Swastik
               </h1>
               <p style={{ fontSize:13, color:'var(--text-color-kumo-subtle)', margin:0, fontFamily:'Inter,var(--font-sans)' }}>
@@ -268,7 +268,7 @@ export default function DashboardPage() {
           </section>
 
           {/* ── Footer status bar ── */}
-          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', padding:'0.75rem 1rem', borderRadius:10, border:'1px solid var(--color-kumo-line)', background:'var(--color-kumo-base)' }}>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', flexWrap:'wrap', gap:'0.5rem', padding:'0.6rem 0.75rem', borderRadius:10, border:'1px solid var(--color-kumo-line)', background:'var(--color-kumo-base)' }}>
             <span style={{ display:'inline-flex', alignItems:'center', gap:6, fontSize:12, fontWeight:500, color:'var(--text-color-kumo-subtle)', fontFamily:'Inter,var(--font-sans)' }}>
               <span style={{ width:7, height:7, borderRadius:'50%', background:'#4caf50', display:'inline-block', boxShadow:'0 0 6px #4caf50' }} />
               System Status — All systems operational

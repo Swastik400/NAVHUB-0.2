@@ -66,10 +66,10 @@ function InsightCard({ insight }: { insight: Insight }) {
       background: 'var(--color-kumo-base)',
       border: '1px solid var(--color-kumo-line)',
       borderRadius: 10,
-      padding: '20px 22px',
+      padding: 'clamp(0.875rem,3vw,1.25rem)',
       display: 'flex',
       flexDirection: 'column',
-      gap: 16,
+      gap: 14,
     }}>
       {/* title row */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
@@ -88,7 +88,7 @@ function InsightCard({ insight }: { insight: Insight }) {
 
       {/* value */}
       <div style={{
-        fontSize: '1.875rem',
+        fontSize: 'clamp(1.375rem,5vw,1.875rem)',
         fontWeight: 500,
         letterSpacing: '-0.03em',
         fontVariantNumeric: 'tabular-nums',
@@ -113,12 +113,12 @@ export default function InsightsPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
         {/* header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 8 }}>
           <div>
-            <h1 style={{ fontSize: '1.25rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>AI Insights</h1>
+            <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.25rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>AI Insights</h1>
             <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 5, marginBottom: 0 }}>
               AI-generated observations about your usage, performance, and spend.
             </p>
@@ -140,7 +140,7 @@ export default function InsightsPage() {
         <div style={{ height: 1, background: 'var(--color-kumo-line)', margin: '20px 0 24px' }} />
 
         {/* grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 12 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 10 }}>
           {INSIGHTS.map((ins, i) => <InsightCard key={i} insight={ins} />)}
         </div>
 

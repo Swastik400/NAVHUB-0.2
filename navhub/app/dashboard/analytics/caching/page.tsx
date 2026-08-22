@@ -58,11 +58,11 @@ function StatCard({ label, value, sub, accent }: { label: string; value: string;
   return (
     <div style={{
       background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)',
-      border: '1px solid', borderRadius: 12, padding: '16px 20px', minHeight: 100,
+      border: '1px solid', borderRadius: 10, padding: 'clamp(0.75rem,3vw,1.25rem)', minHeight: 88,
       display: 'flex', flexDirection: 'column', gap: 4, boxShadow: '0 1px 2px rgba(0,0,0,0.04)',
     }}>
       <span style={{ fontSize: 11, fontWeight: 500, textTransform: 'uppercase', letterSpacing: '0.05em', color: 'var(--text-color-kumo-subtle)' }}>{label}</span>
-      <span style={{ fontSize: 28, fontWeight: 600, lineHeight: 1, marginTop: 4, color: accent ?? 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums' }}>{value}</span>
+      <span style={{ fontSize: 'clamp(1.25rem,5vw,1.75rem)', fontWeight: 600, lineHeight: 1, marginTop: 4, color: accent ?? 'var(--text-color-kumo-default)', fontVariantNumeric: 'tabular-nums' }}>{value}</span>
       {sub && <span style={{ fontSize: 12, marginTop: 2, color: 'var(--text-color-kumo-subtle)' }}>{sub}</span>}
     </div>
   )
@@ -184,12 +184,12 @@ export default function CachingPage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem,4vw,2rem)', width: '100%' }}>
 
         {/* Page header */}
         <div style={{ marginBottom: 8 }}>
-          <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Caching</h1>
-          <p style={{ fontSize: 14, color: 'var(--text-color-kumo-subtle)', marginTop: 6, marginBottom: 0 }}>
+          <h1 style={{ fontSize: 'clamp(1.1rem,4vw,1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Caching</h1>
+          <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>
             Prompt caching activity from your API, Batch, Workbench, and Claude Code traffic.
           </p>
         </div>
@@ -214,7 +214,7 @@ export default function CachingPage() {
         </div>
 
         {/* Stat cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 12, marginBottom: 20 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 10, marginBottom: 20 }}>
           <StatCard label="Cache Hit Rate"     value="84.2%"   sub="↑ 3.1% vs last week" accent="rgb(34,197,94)" />
           <StatCard label="Total Cache Hits"   value="31,200"  sub="Last 7 days" />
           <StatCard label="Total Cache Misses" value="5,880"   sub="Last 7 days" />

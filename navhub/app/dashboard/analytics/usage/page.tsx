@@ -94,7 +94,7 @@ function TokenChart({ data, models, viewBy, monthIdx, year }: {
           </div>
         ))}
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 260 }} preserveAspectRatio="xMidYMid meet">
+      <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', height: 'clamp(160px, 35vw, 260px)' }} preserveAspectRatio="xMidYMid meet">
         <defs>
           {models.map((_, i) => (
             <linearGradient key={i} id={`ug${i}`} x1="0" y1="0" x2="0" y2="1">
@@ -254,13 +254,13 @@ export default function UsagePage() {
   return (
     <DashboardLayout>
       <TabBar />
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(1rem, 4vw, 2rem)', width: '100%' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: 'clamp(0.75rem, 4vw, 2rem)', width: '100%' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, marginBottom: 8 }}>
           <div>
-            <h1 style={{ fontSize: '1.375rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Usage</h1>
-            <p style={{ fontSize: 14, color: 'var(--text-color-kumo-subtle)', marginTop: 6, marginBottom: 0 }}>Token usage across your organization over time.</p>
+            <h1 style={{ fontSize: 'clamp(1.1rem, 4vw, 1.375rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', margin: 0 }}>Usage</h1>
+            <p style={{ fontSize: 13, color: 'var(--text-color-kumo-subtle)', marginTop: 4, marginBottom: 0 }}>Token usage across your organization over time.</p>
           </div>
           <a href="#" aria-label="View documentation" title="View documentation" style={iconBtn}>
             <BookOpen size={20} />
@@ -297,23 +297,23 @@ export default function UsagePage() {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
 
           {/* Stat cards */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: 12 }}>
             <div style={card}>
-              <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total tokens in</span>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total tokens in</span>
               <div style={{ marginTop: 'auto' }}>
-                <span style={{ fontSize: '1.875rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{fmtK(totalIn)}</span>
+                <span style={{ fontSize: 'clamp(1.25rem, 5vw, 1.875rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{fmtK(totalIn)}</span>
               </div>
             </div>
             <div style={card}>
-              <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total tokens out</span>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total tokens out</span>
               <div style={{ marginTop: 'auto' }}>
-                <span style={{ fontSize: '1.875rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{fmtK(totalOut)}</span>
+                <span style={{ fontSize: 'clamp(1.25rem, 5vw, 1.875rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{fmtK(totalOut)}</span>
               </div>
             </div>
             <div style={card}>
-              <span style={{ fontSize: 13, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total web searches</span>
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)' }}>Total web searches</span>
               <div style={{ marginTop: 'auto' }}>
-                <span style={{ fontSize: '1.875rem', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{searches.toLocaleString()}</span>
+                <span style={{ fontSize: 'clamp(1.25rem, 5vw, 1.875rem)', fontWeight: 500, color: 'var(--text-color-kumo-default)', letterSpacing: '-0.02em' }}>{searches.toLocaleString()}</span>
               </div>
             </div>
           </div>
@@ -350,7 +350,7 @@ export default function UsagePage() {
                 <thead>
                   <tr>
                     {[groupBy, 'Input tokens', 'Output tokens', 'Total tokens'].map(h => (
-                      <th key={h} style={{ padding: '8px 12px', fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)', textAlign: h === groupBy ? 'left' : 'right', borderBottom: '1px solid var(--color-kumo-line)', whiteSpace: 'nowrap' }}>{h}</th>
+                      <th key={h} className={h === 'Input tokens' || h === 'Output tokens' ? 'usage-col-hide' : ''} style={{ padding: '8px 10px', fontSize: 12, fontWeight: 500, color: 'var(--text-color-kumo-subtle)', textAlign: h === groupBy ? 'left' : 'right', borderBottom: '1px solid var(--color-kumo-line)', whiteSpace: 'nowrap' }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -362,23 +362,23 @@ export default function UsagePage() {
                       <tr key={m}
                         onMouseEnter={e => (e.currentTarget.style.background = 'var(--color-kumo-tint)')}
                         onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
-                        <td style={{ padding: '10px 12px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-default)' }}>
+                        <td style={{ padding: '9px 10px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-default)' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <span style={{ width: 8, height: 8, borderRadius: '50%', background: MODEL_COLORS[mi], flexShrink: 0 }} />
                             {m}
                           </div>
                         </td>
-                        <td style={{ padding: '10px 12px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-subtle)', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{inp.toLocaleString()}</td>
-                        <td style={{ padding: '10px 12px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-subtle)', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{out.toLocaleString()}</td>
-                        <td style={{ padding: '10px 12px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-default)', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 500 }}>{(inp+out).toLocaleString()}</td>
+                        <td className="usage-col-hide" style={{ padding: '9px 10px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-subtle)', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{inp.toLocaleString()}</td>
+                        <td className="usage-col-hide" style={{ padding: '9px 10px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-subtle)', textAlign: 'right', fontVariantNumeric: 'tabular-nums' }}>{out.toLocaleString()}</td>
+                        <td style={{ padding: '9px 10px', borderBottom: '1px solid var(--color-kumo-line)', color: 'var(--text-color-kumo-default)', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 500 }}>{(inp+out).toLocaleString()}</td>
                       </tr>
                     )
                   })}
                   <tr>
-                    <td style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Total</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{totalIn.toLocaleString()}</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{totalOut.toLocaleString()}</td>
-                    <td style={{ padding: '10px 12px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{(totalIn+totalOut).toLocaleString()}</td>
+                    <td style={{ padding: '9px 10px', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>Total</td>
+                    <td className="usage-col-hide" style={{ padding: '9px 10px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{totalIn.toLocaleString()}</td>
+                    <td className="usage-col-hide" style={{ padding: '9px 10px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{totalOut.toLocaleString()}</td>
+                    <td style={{ padding: '9px 10px', textAlign: 'right', fontVariantNumeric: 'tabular-nums', fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{(totalIn+totalOut).toLocaleString()}</td>
                   </tr>
                 </tbody>
               </table>
@@ -392,9 +392,9 @@ export default function UsagePage() {
 }
 
 const card: React.CSSProperties = {
-  background: 'var(--color-kumo-base)', borderRadius: 12,
-  boxShadow: '0 0 0 1px var(--color-kumo-line)', padding: '1.25rem',
-  display: 'flex', flexDirection: 'column', gap: 12, minHeight: 120,
+  background: 'var(--color-kumo-base)', borderRadius: 10,
+  boxShadow: '0 0 0 1px var(--color-kumo-line)', padding: 'clamp(0.875rem, 3vw, 1.25rem)',
+  display: 'flex', flexDirection: 'column', gap: 10, minHeight: 100,
 }
 const filterBox: React.CSSProperties = {
   display: 'inline-flex', alignItems: 'center', gap: 6,

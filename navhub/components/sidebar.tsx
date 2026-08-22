@@ -191,6 +191,8 @@ const THEME_ICONS: Record<Theme, React.FC> = {
 
 function ThemePill() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
   return (
     <div
       className="flex items-center rounded-lg p-0.5 gap-0.5"
@@ -198,18 +200,19 @@ function ThemePill() {
     >
       {THEME_OPTIONS.map(opt => {
         const Icon = THEME_ICONS[opt.value]
+        const isActive = mounted && theme === opt.value
         return (
           <button
             key={opt.value}
             type="button"
             onClick={() => setTheme(opt.value)}
             aria-label={opt.label}
-            aria-pressed={theme === opt.value}
+            aria-pressed={isActive}
             className="flex items-center justify-center w-10 h-5 rounded-md cursor-pointer border-0 transition-colors"
             style={{
-              background: theme === opt.value ? 'var(--color-kumo-base)' : 'transparent',
-              color: theme === opt.value ? 'var(--text-color-kumo-default)' : 'var(--text-color-kumo-subtle)',
-              boxShadow: theme === opt.value ? '0 0 0 1px var(--color-kumo-line)' : 'none',
+              background: isActive ? 'var(--color-kumo-base)' : 'transparent',
+              color: isActive ? 'var(--text-color-kumo-default)' : 'var(--text-color-kumo-subtle)',
+              boxShadow: isActive ? '0 0 0 1px var(--color-kumo-line)' : 'none',
             }}
           >
             <Icon />

@@ -1,0 +1,36 @@
+﻿function ThemePill() {
+  const { theme, setTheme } = useTheme()
+  return (
+    <div
+      className="flex items-center rounded-lg p-0.5 gap-0.5"
+      style={{ background: 'var(--color-kumo-elevated)', boxShadow: '0 0 0 1px var(--color-kumo-line)' }}
+    >
+      {THEME_OPTIONS.map(opt => {
+        const Icon = THEME_ICONS[opt.value]
+        return (
+          <button
+            key={opt.value}
+            type="button"
+            onClick={() => setTheme(opt.value)}
+            aria-label={opt.label}
+            aria-pressed={theme === opt.value}
+            className="flex items-center justify-center w-10 h-5 rounded-md cursor-pointer border-0 transition-colors"
+            style={{
+              background: theme === opt.value ? 'var(--color-kumo-base)' : 'transparent',
+              color: theme === opt.value ? 'var(--text-color-kumo-default)' : 'var(--text-color-kumo-subtle)',
+              boxShadow: theme === opt.value ? '0 0 0 1px var(--color-kumo-line)' : 'none',
+            }}
+          >
+            <Icon />
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+const PRODUCTS = [
+  { href: '/dashboard/products/osmium-ai',   label: 'Osmium AI',    abbr: 'OA', color: '#2563eb', logo: '/osmium-ai-logo.svg' },
+  { href: '/dashboard/products/aegis-auth',  label: 'Aegis Auth',   abbr: 'AA',  color: '#7c3aed', logo: '/aegislogo.png' },
+  { href: '/dashboard/products/lmlens',      label: 'LMLens',       abbr: 'LM',  color: '#374151', logo: '/lmllenslogo.png' },
+  { href: '/dashboard/products/natraj',      label: 'Natraj',       abbr: 'N',   color: '#b45309', logo: '/natrajlogo.png' },
