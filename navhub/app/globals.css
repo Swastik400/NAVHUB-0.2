@@ -90,16 +90,16 @@
 .light {
   color-scheme: light;
 
-  --color-kumo-canvas:   #f4f5f7;
+  --color-kumo-canvas:   #f7f6f3;
   --color-kumo-elevated: #ffffff;
   --color-kumo-base:     #ffffff;
-  --color-kumo-tint:     #f0f1f3;
-  --color-kumo-line:     #e2e4e9;
+  --color-kumo-tint:     #f0ede8;
+  --color-kumo-line:     #e8e4de;
 
-  --text-color-kumo-default:  #111111;
-  --text-color-kumo-strong:   #000000;
-  --text-color-kumo-subtle:   #555555;
-  --text-color-kumo-inactive: #999999;
+  --text-color-kumo-default:  #1a1814;
+  --text-color-kumo-strong:   #0d0c0a;
+  --text-color-kumo-subtle:   #6b6560;
+  --text-color-kumo-inactive: #a8a39d;
 }
 
 /* ─── Global base ─────────────────────────────────────────── */
