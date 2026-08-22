@@ -1,7 +1,7 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import DashboardLayout from '@/components/dashboard-layout'
+import AnalyticsLayout, { OSMIUM_CONFIG } from '@/components/analytics-layout'
 import { Funnel, Play, CalendarBlank, DotsThree, Printer, CaretLeft, CaretRight, Eye, EyeSlash } from '@phosphor-icons/react'
 import { useState, useRef, useEffect } from 'react'
 
@@ -500,7 +500,7 @@ export default function OsmiumAIPage() {
   }
 
   return (
-    <DashboardLayout>
+    <AnalyticsLayout config={OSMIUM_CONFIG}>
       <div
         className="relative w-full h-full"
         style={{ background: 'var(--color-kumo-canvas)', overflow: unlocked ? 'auto' : 'hidden' }}
@@ -523,6 +523,6 @@ export default function OsmiumAIPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
+    </AnalyticsLayout>
   )
 }
