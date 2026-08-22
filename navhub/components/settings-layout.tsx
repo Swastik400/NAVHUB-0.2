@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ArrowLeft } from '@phosphor-icons/react'
-import DashboardLayout from './dashboard-layout'
 
 const SECTIONS = [
   {
@@ -101,13 +100,11 @@ function SettingsSidebar() {
 
 export default function SettingsLayout({ children }: { children: React.ReactNode }) {
   return (
-    <DashboardLayout>
-      <div className="flex h-full overflow-hidden">
-        <SettingsSidebar />
-        <main className="flex-1 overflow-y-auto px-8 py-8">
-          {children}
-        </main>
-      </div>
-    </DashboardLayout>
+    <div className="flex h-full overflow-hidden">
+      <SettingsSidebar />
+      <main className="flex-1 overflow-y-auto px-8 py-8">
+        {children}
+      </main>
+    </div>
   )
 }

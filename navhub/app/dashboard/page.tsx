@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import DashboardLayout from '@/components/dashboard-layout'
 import Link from 'next/link'
 
 
@@ -158,7 +157,7 @@ export default function DashboardPage() {
   const [showAll, setShowAll] = useState(false)
   const visibleProducts = showAll ? PRODUCT_STATUS : PRODUCT_STATUS.slice(0, 3)
   return (
-    <DashboardLayout>
+    <>
       <style>{`
         .db-cards    { display:grid; grid-template-columns:repeat(3,1fr); gap:0.75rem; }
         .db-ws-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:0; }
@@ -284,7 +283,7 @@ export default function DashboardPage() {
 
         </div>
       </div>
-    </DashboardLayout>
+    </>
   )
 }
 

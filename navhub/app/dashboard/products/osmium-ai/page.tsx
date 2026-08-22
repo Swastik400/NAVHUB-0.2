@@ -1,7 +1,6 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation'
-import DashboardLayout from '@/components/dashboard-layout'
 import Link from 'next/link'
 import { Funnel, Play, CalendarBlank, DotsThree, Printer, CaretLeft, CaretRight, Eye, EyeSlash } from '@phosphor-icons/react'
 import { useState, useRef, useEffect } from 'react'
@@ -501,9 +500,8 @@ export default function OsmiumAIPage() {
   }
 
   return (
-    <DashboardLayout>
-      <div
-        className="relative w-full h-full"
+    <div
+      className="relative w-full h-full"
         style={{ background: 'var(--color-kumo-canvas)', overflow: unlocked ? 'auto' : 'hidden' }}
       >
         {/* Dashboard content — only rendered after unlock */}
@@ -524,6 +522,5 @@ export default function OsmiumAIPage() {
           </div>
         )}
       </div>
-    </DashboardLayout>
   )
 }

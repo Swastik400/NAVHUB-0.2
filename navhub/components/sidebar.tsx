@@ -258,7 +258,7 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
   }, [])
 
   const effectiveCollapsed = isMobile ? false : collapsed
-  const [activePanel, setActivePanel] = useState<string | null>(() => getPanelKey(pathname))
+  const [activePanel, setActivePanel] = useState<string | null>(null)
   const [query, setQuery] = useState('')
   const searchRef = useRef<HTMLInputElement>(null)
 
@@ -268,10 +268,6 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
   const displayPanel = activePanel ?? lastPanelRef.current
   const panel = displayPanel ? PANELS[displayPanel] : null
 
-  useEffect(() => {
-    const key = getPanelKey(pathname)
-    if (key) setActivePanel(key)
-  }, [pathname])
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -435,16 +431,21 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
             </li>
 
             <li className="relative">
-              <Link href="/dashboard/analytics" onClick={() => setActivePanel('analytics')} className={link(pathname.startsWith('/dashboard/analytics'), effectiveCollapsed)}>
+              <button
+                type="button"
+                onClick={() => setActivePanel('analytics')}
+                className={link(pathname.startsWith('/dashboard/analytics'), effectiveCollapsed)}
+                style={{ border: 'none', background: 'transparent', font: 'inherit', textAlign: 'left' }}
+              >
                 <NavIcon name="ChartBar" size={16} className={iconClass(pathname.startsWith('/dashboard/analytics'))} />
                 {!effectiveCollapsed && <><span className="truncate flex-1">Analytics</span><CaretRight size={12} className="shrink-0 opacity-40" /></>}
-              </Link>
+              </button>
             </li>
 
             <li className="relative">
               <Link href="/dashboard/notifications" className={link(pathname.startsWith('/dashboard/notifications'), effectiveCollapsed)}>
                 <NavIcon name="ClockCounterClockwise" size={16} className={iconClass(pathname.startsWith('/dashboard/notifications'))} />
-                {!effectiveCollapsed && <><span className="truncate flex-1">Notifications</span><CaretRight size={12} className="shrink-0 opacity-40" /></>}
+                {!effectiveCollapsed && <span className="truncate flex-1">Notifications</span>}
               </Link>
             </li>
 
@@ -466,20 +467,20 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
 
             {PRODUCTS.map(product => {
               const panelKey = product.href.split('/').pop()!
-              const isActive = activePanel === panelKey || pathname.startsWith(product.href)
               return (
                 <li key={product.href} className="relative">
-                  <Link
-                    href={product.href}
+                  <button
+                    type="button"
                     onClick={() => setActivePanel(panelKey)}
-                    className={link(isActive, effectiveCollapsed)}
+                    className={link(activePanel === panelKey, effectiveCollapsed)}
+                    style={{ border: 'none', background: 'transparent', font: 'inherit', textAlign: 'left' }}
                   >
                     {product.logo
-                      ? <img src={product.logo} alt="" aria-hidden="true" style={{ width: 16, height: 16, minWidth: 16, borderRadius: 3, objectFit: 'cover', flexShrink: 0, opacity: isActive ? 1 : 0.85 }} />
-                      : <span aria-hidden="true" style={{ width: 16, height: 16, minWidth: 16, borderRadius: 3, background: product.color, color: '#fff', fontSize: 9, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, opacity: isActive ? 1 : 0.6 }}>{product.abbr}</span>
+                      ? <img src={product.logo} alt="" aria-hidden="true" style={{ width: 16, height: 16, minWidth: 16, borderRadius: 3, objectFit: 'cover', flexShrink: 0, opacity: activePanel === panelKey ? 1 : 0.85 }} />
+                      : <span aria-hidden="true" style={{ width: 16, height: 16, minWidth: 16, borderRadius: 3, background: product.color, color: '#fff', fontSize: 9, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, opacity: activePanel === panelKey ? 1 : 0.6 }}>{product.abbr}</span>
                     }
                     {!effectiveCollapsed && <><span className="truncate flex-1">{product.label}</span><CaretRight size={12} className="shrink-0 opacity-40" /></>}
-                  </Link>
+                  </button>
                 </li>
               )
             })}
