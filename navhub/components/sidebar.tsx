@@ -531,7 +531,7 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
                         animation: open ? `subitem-in 180ms cubic-bezier(0.4,0,0.2,1) ${40 + i * 30}ms both` : 'none',
                       }}
                     >
-                      <Link href={item.href} onClick={onClose} className={sublink(currentHref === item.href)}>
+                      <Link href={item.href} className={sublink(currentHref === item.href)}>
                         <NavIcon name={item.icon} size={16} className={iconClass(pathname === item.href)} />
                         <span className="truncate flex-1">{item.label}</span>
                       </Link>
