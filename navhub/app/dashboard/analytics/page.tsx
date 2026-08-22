@@ -1,4 +1,4 @@
-'use client'
+﻿﻿﻿'use client'
 
 import { useState, useRef, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
@@ -116,114 +116,60 @@ function DateRangePicker({ onClose, onApply }: { onClose: () => void; onApply: (
     onApply(`${s} – ${e2}`)
   }
 
-  const btnBase: React.CSSProperties = {
-    width: 32, height: 32, borderRadius: 6, border: 'none', cursor: 'pointer',
-    fontSize: 13, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center',
-    transition: 'background 0.1s',
-  }
+  const CELL = 26
 
   return (
-    <div ref={ref} className="absolute right-0 top-full mt-2 z-50 flex flex-col sm:flex-row rounded-xl border shadow-xl overflow-hidden"
-      style={{ background: 'var(--color-kumo-base)', borderColor: 'var(--color-kumo-line)', width: 'min(560px, 95vw)' }}>
-
-      {/* left — presets */}
-      <div className="flex flex-row sm:flex-col overflow-x-auto sm:overflow-visible py-2 border-b sm:border-b-0 sm:border-r" style={{ borderColor: 'var(--color-kumo-line)' }}>
+    <div ref={ref} style={{ position: 'absolute', right: 0, top: '100%', marginTop: 8, zIndex: 50, display: 'inline-flex', flexDirection: 'row', background: 'var(--color-kumo-base)', border: '1px solid var(--color-kumo-line)', borderRadius: 12, boxShadow: '0 8px 32px rgba(0,0,0,0.18)', overflow: 'hidden', maxWidth: '96vw' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', borderRight: '1px solid var(--color-kumo-line)', flexShrink: 0, padding: '6px 0' }}>
         {PRESETS.map(p => (
           <button key={p.value} type="button" onClick={() => applyPreset(p.value)}
-            className="text-left px-4 py-1.5 text-sm cursor-pointer border-0 transition-colors"
-            style={{
-              background: preset === p.value ? 'var(--color-kumo-tint)' : 'transparent',
-              color: preset === p.value ? 'var(--text-color-kumo-default)' : 'var(--text-color-kumo-subtle)',
-              fontWeight: preset === p.value ? 600 : 400,
-            }}>
+            style={{ textAlign: 'left', padding: '5px 14px', border: 'none', cursor: 'pointer', fontSize: 12, whiteSpace: 'nowrap', background: preset === p.value ? 'var(--color-kumo-tint)' : 'transparent', color: preset === p.value ? 'var(--text-color-kumo-default)' : 'var(--text-color-kumo-subtle)', fontWeight: preset === p.value ? 600 : 400 }}>
             {p.label}
           </button>
         ))}
       </div>
-
-      {/* right — calendar */}
-      <div className="flex flex-col flex-1 p-4 gap-3">
-
-        {/* month nav */}
-        <div className="flex items-center justify-between">
-          <button type="button" onClick={prevMonth}
-            className="flex items-center justify-center rounded-md border-0 cursor-pointer transition-colors"
-            style={{ width: 28, height: 28, background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)' }}>
-            <CaretLeft size={14} weight="bold" />
-          </button>
-          <span className="text-sm font-semibold" style={{ color: 'var(--text-color-kumo-default)' }}>
-            {MONTHS[viewMonth]} {viewYear}
-          </span>
-          <button type="button" onClick={nextMonth}
-            className="flex items-center justify-center rounded-md border-0 cursor-pointer transition-colors"
-            style={{ width: 28, height: 28, background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)' }}>
-            <CaretRight size={14} weight="bold" />
-          </button>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 12, gap: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+          <button type="button" onClick={prevMonth} style={{ width: 22, height: 22, borderRadius: 4, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)', flexShrink: 0 }}><CaretLeft size={11} weight="bold" /></button>
+          <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-color-kumo-default)' }}>{MONTHS[viewMonth]} {viewYear}</span>
+          <button type="button" onClick={nextMonth} style={{ width: 22, height: 22, borderRadius: 4, border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)', flexShrink: 0 }}><CaretRight size={11} weight="bold" /></button>
         </div>
-
-        {/* day headers */}
-        <div className="grid grid-cols-7 gap-0.5">
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(7, ${CELL}px)`, gap: 2 }}>
           {DAYS.map(d => (
-            <div key={d} className="flex items-center justify-center text-xs font-medium" style={{ height: 28, color: 'var(--text-color-kumo-subtle)' }}>{d}</div>
+            <div key={d} style={{ width: CELL, height: 20, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 600, color: 'var(--text-color-kumo-subtle)' }}>{d}</div>
           ))}
         </div>
-
-        {/* day cells */}
-        <div className="grid grid-cols-7 gap-0.5">
+        <div style={{ display: 'grid', gridTemplateColumns: `repeat(7, ${CELL}px)`, gap: 2 }}>
           {cells.map((d, i) => {
-            if (!d) return <div key={i} />
-            const isStart  = start && isSame(d, start)
-            const isEnd    = end   && isSame(d, end)
-            const isToday  = isSame(d, today)
-            const inRng    = inRange(d)
+            if (!d) return <div key={i} style={{ width: CELL, height: CELL }} />
+            const isStart = start && isSame(d, start)
+            const isEnd = end && isSame(d, end)
+            const isToday = isSame(d, today)
+            const inRng = inRange(d)
             const isFuture = d > today
             return (
-              <button key={i} type="button"
-                disabled={isFuture}
-                onClick={() => pickDay(d)}
-                onMouseEnter={() => setHovered(d)}
-                onMouseLeave={() => setHovered(null)}
-                style={{
-                  ...btnBase,
-                  width: '100%',
-                  background: (isStart || isEnd) ? 'var(--color-kumo-brand)' : inRng ? 'var(--color-kumo-tint)' : 'transparent',
-                  color: (isStart || isEnd) ? '#fff' : isFuture ? 'var(--text-color-kumo-subtle)' : 'var(--text-color-kumo-default)',
-                  opacity: isFuture ? 0.35 : 1,
-                  outline: isToday && !isStart && !isEnd ? '1.5px solid var(--color-kumo-brand)' : 'none',
-                  borderRadius: isStart ? '6px 0 0 6px' : isEnd ? '0 6px 6px 0' : inRng ? 0 : 6,
-                }}>
+              <button key={i} type="button" disabled={isFuture} onClick={() => pickDay(d)} onMouseEnter={() => setHovered(d)} onMouseLeave={() => setHovered(null)}
+                style={{ width: CELL, height: CELL, border: 'none', cursor: isFuture ? 'default' : 'pointer', fontSize: 11, fontWeight: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.1s', flexShrink: 0, background: (isStart || isEnd) ? 'var(--color-kumo-brand)' : inRng ? 'var(--color-kumo-tint)' : 'transparent', color: (isStart || isEnd) ? '#fff' : isFuture ? 'var(--text-color-kumo-subtle)' : 'var(--text-color-kumo-default)', opacity: isFuture ? 0.35 : 1, outline: isToday && !isStart && !isEnd ? '1.5px solid var(--color-kumo-brand)' : 'none', borderRadius: isStart ? '4px 0 0 4px' : isEnd ? '0 4px 4px 0' : inRng ? 0 : 4 }}>
                 {d.getDate()}
               </button>
             )
           })}
         </div>
-
-        {/* footer */}
-        <div className="flex items-center justify-between pt-2 border-t" style={{ borderColor: 'var(--color-kumo-line)' }}>
-          <span className="text-xs" style={{ color: 'var(--text-color-kumo-subtle)' }}>
-            {start ? start.toLocaleDateString('en-GB', { day:'2-digit', month:'short' }) : '—'}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingTop: 8, borderTop: '1px solid var(--color-kumo-line)' }}>
+          <span style={{ fontSize: 11, color: 'var(--text-color-kumo-subtle)' }}>
+            {start ? start.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : '–'}
             {' – '}
-            {end ? end.toLocaleDateString('en-GB', { day:'2-digit', month:'short' }) : '—'}
+            {end ? end.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) : '–'}
           </span>
-          <div className="flex gap-2">
-            <button type="button" onClick={onClose}
-              className="px-3 rounded-lg text-xs font-medium border-0 cursor-pointer transition-colors"
-              style={{ height: 30, background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)' }}>
-              Cancel
-            </button>
-            <button type="button" onClick={applyCustom} disabled={!start}
-              className="px-3 rounded-lg text-xs font-medium border-0 cursor-pointer transition-colors disabled:opacity-40"
-              style={{ height: 30, background: 'var(--color-kumo-brand)', color: '#fff' }}>
-              Apply
-            </button>
+          <div style={{ display: 'flex', gap: 6 }}>
+            <button type="button" onClick={onClose} style={{ height: 26, padding: '0 10px', borderRadius: 6, border: 'none', cursor: 'pointer', fontSize: 11, fontWeight: 500, background: 'var(--color-kumo-tint)', color: 'var(--text-color-kumo-default)' }}>Cancel</button>
+            <button type="button" onClick={applyCustom} disabled={!start} style={{ height: 26, padding: '0 10px', borderRadius: 6, border: 'none', cursor: !start ? 'default' : 'pointer', fontSize: 11, fontWeight: 500, background: 'var(--color-kumo-brand)', color: '#fff', opacity: !start ? 0.4 : 1 }}>Apply</button>
           </div>
         </div>
       </div>
     </div>
   )
 }
-
-/* ── card shell ───────────────────────────────────────── */
 function Shell({ title, children, pad = true, style }: { title: string; children: React.ReactNode; pad?: boolean; style?: React.CSSProperties }) {
   return (
     <div className="relative flex min-h-0 flex-col overflow-hidden rounded-xl border shadow-xs"

@@ -63,14 +63,28 @@ function SectionCard({ title, children }: { title: string; children: React.React
   )
 }
 
+/* Row for selects — label left, control right (max 260px), stacks on small */
 function Row({ label, desc, children, last }: { label: string; desc?: string; children: React.ReactNode; last?: boolean }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '13px 16px', borderTop: last === false ? 'none' : '1px solid var(--color-kumo-line)', flexWrap: 'wrap' }}>
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, padding: '13px 16px', borderTop: last === false ? 'none' : '1px solid var(--color-kumo-line)', flexWrap: 'wrap' }}>
+      <div style={{ flex: '1 1 160px', minWidth: 0 }}>
+        <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>{label}</p>
+        {desc && <p style={{ fontSize: 12, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', lineHeight: 1.4 }}>{desc}</p>}
+      </div>
+      <div style={{ flexShrink: 0, width: '100%', maxWidth: 260 }}>{children}</div>
+    </div>
+  )
+}
+
+/* Row for inline controls (switch, buttons) — label left, control pinned right, never wraps control */
+function RowInline({ label, desc, children, last }: { label: string; desc?: string; children: React.ReactNode; last?: boolean }) {
+  return (
+    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16, padding: '13px 16px', borderTop: last === false ? 'none' : '1px solid var(--color-kumo-line)' }}>
       <div style={{ flex: 1, minWidth: 0 }}>
         <p style={{ fontSize: 13, fontWeight: 500, margin: 0, color: 'var(--text-color-kumo-default)', fontFamily: 'Inter, var(--font-sans)' }}>{label}</p>
         {desc && <p style={{ fontSize: 12, margin: 0, color: 'var(--text-color-kumo-subtle)', fontFamily: 'Inter, var(--font-sans)', lineHeight: 1.4 }}>{desc}</p>}
       </div>
-      {children}
+      <div style={{ flexShrink: 0 }}>{children}</div>
     </div>
   )
 }
@@ -84,7 +98,7 @@ function Select({ value, onChange, options }: { value: string; onChange: (v: str
         height: 32, padding: '0 10px', borderRadius: 7, fontSize: 12, fontWeight: 500,
         fontFamily: 'Inter, var(--font-sans)', cursor: 'pointer', outline: 'none',
         background: 'var(--color-kumo-canvas)', color: 'var(--text-color-kumo-default)',
-        border: '1px solid var(--color-kumo-line)', minWidth: 180,
+        border: '1px solid var(--color-kumo-line)', width: '100%',
       }}
     >
       {options.map(o => <option key={o} value={o}>{o}</option>)}
@@ -184,7 +198,7 @@ export default function PreferencesPage() {
               })}
             </div>
           </div>
-          <Row label="Density" desc="Controls spacing and padding across the UI.">
+          <RowInline label="Density" desc="Controls spacing and padding across the UI.">
             <div style={{ display: 'flex', gap: 6 }}>
               {DENSITIES.map(d => (
                 <button
@@ -193,23 +207,24 @@ export default function PreferencesPage() {
                   title={d.desc}
                   style={{
                     height: 30, padding: '0 12px', borderRadius: 7, cursor: 'pointer', fontSize: 12,
-                    fontWeight: 500, fontFamily: 'Inter, var(--font-sans)',
+                    fontWeight: 500, fontFamily: 'Inter, var(--font-sans)', whiteSpace: 'nowrap',
                     border: density === d.key ? '1.5px solid rgb(59,130,246)' : '1px solid var(--color-kumo-line)',
                     background: density === d.key ? 'rgba(59,130,246,0.08)' : 'var(--color-kumo-canvas)',
                     color: density === d.key ? 'rgb(59,130,246)' : 'var(--text-color-kumo-subtle)',
+                    transition: 'all 0.15s',
                   }}
                 >
                   {d.label}
                 </button>
               ))}
             </div>
-          </Row>
-          <Row label="Reduce motion" desc="Minimizes animations and transitions.">
+          </RowInline>
+          <RowInline label="Reduce motion" desc="Minimizes animations and transitions.">
             <Switch on={reducedMotion} onChange={setReducedMotion} />
-          </Row>
-          <Row label="Collapse sidebar by default" desc="Start with the sidebar collapsed on load.">
+          </RowInline>
+          <RowInline label="Collapse sidebar by default" desc="Start with the sidebar collapsed on load.">
             <Switch on={sidebarCollapsed} onChange={setSidebarCollapsed} />
-          </Row>
+          </RowInline>
         </SectionCard>
 
         {/* Language & Region */}

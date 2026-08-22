@@ -433,7 +433,7 @@ function SidebarInner({ onClose }: { onClose?: () => void }) {
             </li>
 
             <li className="relative">
-              <Link href="/dashboard/analytics" className={link(pathname.startsWith('/dashboard/analytics'), effectiveCollapsed)}>
+              <Link href="/dashboard/analytics" onClick={() => setActivePanel('analytics')} className={link(pathname.startsWith('/dashboard/analytics'), effectiveCollapsed)}>
                 <NavIcon name="ChartBar" size={16} className={iconClass(pathname.startsWith('/dashboard/analytics'))} />
                 {!effectiveCollapsed && <><span className="truncate flex-1">Analytics</span><CaretRight size={12} className="shrink-0 opacity-40" /></>}
               </Link>
